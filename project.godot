@@ -11,8 +11,20 @@ config_version=5
 [application]
 
 config/name="OnlyDevsGame"
+run/main_scene="uid://bta6ffqd60hxj"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*uid://b177iwcg7chbc"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [physics]
 
