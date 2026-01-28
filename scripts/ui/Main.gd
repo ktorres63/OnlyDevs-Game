@@ -13,17 +13,19 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_manager.evento_cambiado.connect(mostrar_evento)
+	game_manager.stats_actualizados.connect(_on_stats_actualizados)
 	game_manager.start_game()
-	actualizar_hud()
-
 
 func mostrar_evento(evento) -> void:
 	event_text.text = evento.texto
-	actualizar_hud()
 	
-func actualizar_hud():
-	money_label.text = "💰Dinero: $" + str(GameState.dinero)
-	turn_label.text = "Turno: " + str(GameState.turno)
+
+func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia):
+	money_label.text = "💰Dinero: $" + str(dinero)
+	turn_label.text = "Turno: " + str(turno)
+	
+	suspicion_bar_red.value = sospecha_imperio
+	suspicion_bar_blue.value = sospecha_resistencia
 
 func _on_phone_red_pressed():
 	game_manager.elegir_opcion("Imperio")

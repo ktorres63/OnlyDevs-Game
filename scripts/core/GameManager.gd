@@ -1,20 +1,5 @@
 extends Node
 
-#@onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/SuspicionBarRed
-#@onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/SuspicionBarBlue
-#
-#var suspicionRed := 0
-#var suspicionBlue := 0
-#
-#
-#func add_suspicionBlue(amount: int):
-#	suspicionBlue = clamp(suspicionBlue + amount, 0,100)
-#	suspicion_bar_blue.value = suspicionBlue
-#
-#func add_suspicionRed(amount: int):
-#	suspicionRed = clamp(suspicionRed + amount, 0,100)
-#	suspicion_bar_red.value = suspicionRed
-	
 const MAX_TURNOS: int = 24
 const OBJETIVO_DINERO: int = 1000
 const MAX_SOSPECHA: int = 100
