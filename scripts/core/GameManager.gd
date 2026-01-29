@@ -4,8 +4,11 @@ const MAX_TURNOS: int = 24
 const OBJETIVO_DINERO: int = 1000
 const MAX_SOSPECHA: int = 100
 
+var answered_phone
+
 signal evento_cambiado(evento)
 signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
+signal call_phone(team_to_call)
 
 func start_game():
 	GameState.turno = 1
@@ -25,10 +28,31 @@ func emit_stats():
 		 GameState.sospecha_Imperio,
 		 GameState.sospecha_Resistencia
 		)
+		
+
+func answer_phone(phone):
+	answered_phone = phone
+	
 func new_turn():
 	if(GameState.turno > MAX_TURNOS):
 		checkFinal()
 		return
+	
+	print("comienzo turno")
+	#await get_tree().create_timer(randf_range(5,10)).timeout
+	var team_to_call
+	if randf_range(0,1) > 0.5:
+		team_to_call = "blue" 
+	else:
+		team_to_call = "red"
+	
+	for i in range(20):
+		print("lamando ", i)
+		emit_signal("call_phone",{"team_to_call":team_to_call})	
+		await get_tree().create_timer(1).timeout
+		if answered_phone == team_to_call:
+			print("[-] contestado ",answered_phone)
+			break
 		
 	emit_signal("evento_cambiado", {
 		"texto": "Interceptamos Informacion de un posible ataque.",
