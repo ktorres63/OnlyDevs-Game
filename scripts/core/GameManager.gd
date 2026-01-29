@@ -5,10 +5,12 @@ const OBJETIVO_DINERO: int = 1000
 const MAX_SOSPECHA: int = 100
 
 var answered_phone
+var probabilidad = 0.5
 
 signal evento_cambiado(evento)
 signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
 signal call_phone(team_to_call)
+signal end_call(team_to_call)
 
 func start_game():
 	GameState.turno = 1
@@ -39,21 +41,31 @@ func new_turn():
 		return
 	
 	print("comienzo turno")
-	#await get_tree().create_timer(randf_range(5,10)).timeout
+	await get_tree().create_timer(randf_range(5,10)).timeout
+	#Realizar llamada
 	var team_to_call
-	if randf_range(0,1) > 0.5:
+	if probabilidad < 0.3 or probabilidad > 0.7:
+		probabilidad = 0.5
+	if randf_range(0,1) > probabilidad:
 		team_to_call = "blue" 
+		probabilidad-=0.2
 	else:
 		team_to_call = "red"
+		probabilidad+=0.2
 	
 	for i in range(20):
-		print("lamando ", i)
+		print("lamando ", team_to_call," ", i)
 		emit_signal("call_phone",{"team_to_call":team_to_call})	
 		await get_tree().create_timer(1).timeout
 		if answered_phone == team_to_call:
 			print("[-] contestado ",answered_phone)
+			answered_phone = ""
 			break
-		
+	# tiempo que dura llamada
+	await get_tree().create_timer(3).timeout
+	emit_signal("end_call",team_to_call)
+	# TODO: elección de mandar información
+	
 	emit_signal("evento_cambiado", {
 		"texto": "Interceptamos Informacion de un posible ataque.",
 		"opciones": ["Imperio", "Resistencia"]
