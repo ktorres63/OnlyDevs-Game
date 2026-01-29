@@ -21,7 +21,7 @@ func mostrar_evento(evento) -> void:
 	
 
 func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia):
-	money_label.text = "💰Dinero: $" + str(dinero)
+	money_label.text = "Dinero: $" + str(dinero)
 	turn_label.text = "Turno: " + str(turno)
 	
 	suspicion_bar_red.value = sospecha_imperio
