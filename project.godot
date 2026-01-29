@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="OnlyDevsGame"
-run/main_scene="uid://bta6ffqd60hxj"
+run/main_scene="uid://pm1hyj5kjqdw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
