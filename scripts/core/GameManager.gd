@@ -58,4 +58,16 @@ func checkFinal():
 		print("VICTORIA")
 	else:
 		print("DERROTA")
+
+func procesar_accion_telefono(accion, bando):
+	if accion == "Vender":
+		GameState.dinero += 10
+		print("Información vendida al " + bando + ". Dinero actual: " + str(GameState.dinero))
 		
+		# Aca aumentar de sospecha / otra mecanica: if bando == "Imperio": GameState.sospecha_Imperio += 5
+		
+	elif accion == "Entregar":
+		print("Información entregada al " + bando)
+	
+	emit_stats()
+	
