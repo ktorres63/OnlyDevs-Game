@@ -100,10 +100,21 @@ func procesar_accion_telefono(accion, bando):
 		GameState.dinero += 10
 		print("Información vendida al " + bando + ". Dinero actual: " + str(GameState.dinero))
 		
-		# Aca aumentar de sospecha / otra mecanica: if bando == "Imperio": GameState.sospecha_Imperio += 5
+		if bando == "Imperio":
+			GameState.sospecha_Imperio += 10
+		else:
+			GameState.sospecha_Resistencia += 10
 		
 	elif accion == "Entregar":
 		print("Información entregada al " + bando)
+		
+		if bando == "Imperio":
+			GameState.sospecha_Imperio -= 5
+			GameState.sospecha_Resistencia += 5
+		else:
+			GameState.sospecha_Resistencia -= 5
+			GameState.sospecha_Imperio += 5
 	
 	emit_stats()
-	
+	GameState.turno += 1
+	new_turn()
