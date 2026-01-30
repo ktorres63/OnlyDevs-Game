@@ -8,6 +8,12 @@ extends Control
 @onready var game_manager = $GameManager
 @onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
 @onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/SuspicionBarBlue
+@onready var sfx_ring = $SfxRing
+@onready var sfx_hangup = $SfxHangup
+@onready var sfx_click = $SfxClick
+@onready var sfx_paper_info = $SfxPaperInfo
+@onready var sfx_paper_sell = $SfxPaperSell
+@onready var sfx_static = $SfxStatic
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,6 +38,11 @@ func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistenci
 	suspicion_bar_blue.value = sospecha_resistencia
 
 func _on_phone_red_pressed():
+	sfx_click.play()
+	sfx_ring.stop()
+	sfx_paper_sell.play()
+	if not sfx_static.playing:
+		sfx_static.play()
 	game_manager.answer_phone("red")
 	game_manager.elegir_opcion("Imperio")
 	phone_red.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
@@ -39,12 +50,23 @@ func _on_phone_red_pressed():
 	# TODO: cambiar por url al sprite de telefono descolgado
 
 func reset_sprite(team):
+	sfx_hangup.play()
+	sfx_ring.stop()
+	sfx_paper_info.play()
+	sfx_static.stop()
+	await get_tree().create_timer(2.0).timeout
+	sfx_hangup.stop()
 	if team == "blue":
 		phone_blue.texture_normal = load("res://assets/sprites/ui/phoneBlue.png")
 	else:
 		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png")
 
 func _on_phone_blue_pressed():
+	sfx_click.play()
+	sfx_ring.stop()
+	sfx_paper_sell.play()
+	if not sfx_static.playing:
+		sfx_static.play()
 	game_manager.answer_phone("blue")
 	game_manager.elegir_opcion("Resistencia")
 	phone_blue.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
@@ -58,6 +80,9 @@ func call_phone(evento):
 	else:
 		phone = phone_red
 		phone_red.disabled = false
+
+	if not sfx_ring.playing:
+		sfx_ring.play()
 
 	UIAnimations.shake(phone)	
 		
