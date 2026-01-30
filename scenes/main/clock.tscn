@@ -15,27 +15,35 @@ grow_vertical = 2
 script = ExtResource("1_j0qyj")
 
 [node name="ClockBase" type="TextureRect" parent="." unique_id=1459067788]
-layout_mode = 0
-offset_right = 120.0
-offset_bottom = 120.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_2skdo")
 expand_mode = 1
 
 [node name="Hand_Long" type="TextureRect" parent="." unique_id=2134791208]
-layout_mode = 0
-offset_top = -1.0
-offset_right = 120.0
-offset_bottom = 119.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 6.2831855
 pivot_offset = Vector2(60, 60)
 texture = ExtResource("2_j0qyj")
 expand_mode = 1
 
 [node name="Hand_Short" type="TextureRect" parent="." unique_id=1438789967]
-layout_mode = 0
-offset_left = 1.0
-offset_right = 121.0
-offset_bottom = 120.0
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(60, 60)
 texture = ExtResource("3_6n5h3")
 expand_mode = 1
