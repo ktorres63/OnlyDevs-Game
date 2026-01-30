@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ce4w3jkbv46k3" path="res://scripts/animation/Clock.gd" id="1_j0qyj"]
 [ext_resource type="Texture2D" uid="uid://dvh1kwkee006r" path="res://assets/graphics/clock/AgujaMinutos.png" id="2_j0qyj"]
 [ext_resource type="Texture2D" uid="uid://bvo3q6iy3puvx" path="res://assets/graphics/clock/AgujaHoras.png" id="3_6n5h3"]
+[ext_resource type="AudioStream" uid="uid://c0v7q2k4h8j5k" path="res://assets/audio/clock_tick.wav" id="4_tick"]
 
 [node name="Clock" type="Control" unique_id=262250937]
 clip_contents = true

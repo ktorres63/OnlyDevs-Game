@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctmv2xmxo5j1h"]
+[gd_scene load_steps=3 format=3 uid="uid://ctmv2xmxo5j1h"]
 
 [ext_resource type="Script" path="res://scripts/ui/GameOver.gd" id="1_game_over"]
+[ext_resource type="AudioStream" uid="uid://bvybr78k5d4g1" path="res://assets/audio/game_over.wav" id="2_gameover_audio"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -10,6 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_game_over")
+
+[node name="SfxGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gameover_audio")
+volume_db = -6.0
+autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
