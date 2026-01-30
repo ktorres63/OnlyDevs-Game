@@ -29,7 +29,8 @@ anchor_bottom = 0.96
 offset_top = -221.59998
 offset_right = 316.04
 offset_bottom = 18.799988
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_wqs35")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1016430569]

@@ -1,11 +1,13 @@
 extends Control
 
-@onready var money_label = $HBoxContainer/VBoxContainer3/MoneyLabel
-@onready var turn_label = $HBoxContainer/VBoxContainer2/TurnLabel
-@onready var event_text = $HBoxContainer/VBoxContainer2/EventPanel/EventText
-@onready var phone_red = $HBoxContainer/VBoxContainer/VBoxContainer/PhoneRed
-@onready var phone_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/PhoneBlue
+@onready var money_label = $RightPanel/MoneyLabel
+@onready var turn_label = $CenterPanel/TurnLabel
+@onready var event_text = $CenterPanel/EventPanel/EventText
+@onready var phone_red = $LeftPanel/PhoneRed
+@onready var phone_blue = $RightPanel/PhoneBlue
 @onready var game_manager = $GameManager
+@onready var suspicion_bar_red = $LeftPanel/HBoxContainer/VBoxContainer/SuspicionBarRed
+@onready var suspicion_bar_blue = $RightPanel/HBoxContainer/VBoxContainer/SuspicionBarBlue
 @onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
 @onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/SuspicionBarBlue
 @onready var sfx_ring = $SfxRing
