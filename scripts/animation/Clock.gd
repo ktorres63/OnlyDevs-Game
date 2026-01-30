@@ -1,7 +1,7 @@
 extends Control
 
-@onready var minute_hand = $Hand_Long
-@onready var hour_hand = $Hand_Short
+@onready var minute_hand = $Hand_Long2
+@onready var hour_hand = $Hand_Short2
 
 @export var seconds_per_hour := 5.0
 var time : float= 0.0
