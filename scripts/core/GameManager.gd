@@ -39,8 +39,10 @@ func new_turn():
 	if(GameState.turno > MAX_TURNOS):
 		checkFinal()
 		return
-	
 	print("comienzo turno")
+	# TODO: llegada de información
+	
+	
 	await get_tree().create_timer(randf_range(5,10)).timeout
 	#Realizar llamada
 	var team_to_call

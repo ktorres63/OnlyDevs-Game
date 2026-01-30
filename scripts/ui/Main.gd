@@ -6,7 +6,7 @@ extends Control
 @onready var phone_red = $HBoxContainer/VBoxContainer/VBoxContainer/PhoneRed
 @onready var phone_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/PhoneBlue
 @onready var game_manager = $GameManager
-@onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/VBoxContainer/SuspicionBarRed
+@onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
 @onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/SuspicionBarBlue
 
 # Called when the node enters the scene tree for the first time.
