@@ -15,6 +15,8 @@ extends Control
 @onready var sfx_paper_sell = $SfxPaperSell
 @onready var sfx_static = $SfxStatic
 
+const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_manager.evento_cambiado.connect(mostrar_evento)
@@ -31,7 +33,7 @@ func mostrar_evento(evento) -> void:
 	
 
 func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia):
-	money_label.text = "💰Dinero: $" + str(dinero)
+	money_label.text = "Dinero: $" + str(dinero)
 	turn_label.text = "Turno: " + str(turno)
 	
 	suspicion_bar_red.value = sospecha_imperio
@@ -44,10 +46,41 @@ func _on_phone_red_pressed():
 	if not sfx_static.playing:
 		sfx_static.play()
 	game_manager.answer_phone("red")
-	game_manager.elegir_opcion("Imperio")
+	mostrar_panel_decision("Imperio", phone_red)
 	phone_red.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
 	phone_red.disabled = true	
+	
 	# TODO: cambiar por url al sprite de telefono descolgado
+
+func _on_phone_blue_pressed():
+	sfx_click.play()
+	sfx_ring.stop()
+	sfx_paper_sell.play()
+	if not sfx_static.playing:
+		sfx_static.play()
+	game_manager.answer_phone("blue")
+	mostrar_panel_decision("Resistencia", phone_blue)
+	phone_blue.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
+	phone_blue.disabled = true
+
+func mostrar_panel_decision(bando: String, boton_telefono: Control):
+	var panel = PANEL_DECISION_SCENE.instantiate()
+	add_child(panel)
+	panel.setup_y_mostrar(bando, boton_telefono.global_position)
+	panel.opcion_seleccionada.connect(_on_decision_tomada)
+	
+func _on_decision_tomada(accion: String, bando: String):
+	print("El jugador decidió: ", accion, " para el bando: ", bando)
+	game_manager.procesar_accion_telefono(accion, bando)
+	actualizar_estado_telefono(bando)
+	
+func actualizar_estado_telefono(bando: String):
+	if bando == "Imperio": 
+		phone_red.texture_normal = load("res://assets/sprites/ui/mask_blue.png") # Tu lógica de máscara
+		phone_red.disabled = true
+	elif bando == "Resistencia":
+		phone_blue.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
+		phone_blue.disabled = true
 
 func reset_sprite(team):
 	sfx_hangup.play()
@@ -61,17 +94,6 @@ func reset_sprite(team):
 	else:
 		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png")
 
-func _on_phone_blue_pressed():
-	sfx_click.play()
-	sfx_ring.stop()
-	sfx_paper_sell.play()
-	if not sfx_static.playing:
-		sfx_static.play()
-	game_manager.answer_phone("blue")
-	game_manager.elegir_opcion("Resistencia")
-	phone_blue.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
-	phone_blue.disabled = true
-	
 func call_phone(evento):
 	var phone
 	if evento.team_to_call == "blue":
@@ -86,5 +108,3 @@ func call_phone(evento):
 
 	UIAnimations.shake(phone)	
 		
-		
-	
