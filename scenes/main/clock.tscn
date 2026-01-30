@@ -6,44 +6,27 @@
 [ext_resource type="Texture2D" uid="uid://bvo3q6iy3puvx" path="res://assets/graphics/clock/AgujaHoras.png" id="3_6n5h3"]
 
 [node name="Clock" type="Control" unique_id=262250937]
+clip_contents = true
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.16796875
+anchor_bottom = 0.22222224
+offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j0qyj")
+metadata/_edit_use_anchors_ = true
 
-[node name="ClockBase" type="TextureRect" parent="." unique_id=1459067788]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="base" type="Sprite2D" parent="." unique_id=2066971571]
+position = Vector2(108.47002, 82.22)
+scale = Vector2(0.21197264, 0.15972656)
 texture = ExtResource("1_2skdo")
-expand_mode = 1
 
-[node name="Hand_Long" type="TextureRect" parent="." unique_id=2134791208]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.2831855
-pivot_offset = Vector2(60, 60)
+[node name="Hand_Long2" type="Sprite2D" parent="." unique_id=981795310]
+position = Vector2(107, 81.5)
+scale = Vector2(0.20507813, 0.16113281)
 texture = ExtResource("2_j0qyj")
-expand_mode = 1
 
-[node name="Hand_Short" type="TextureRect" parent="." unique_id=1438789967]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(60, 60)
+[node name="Hand_Short2" type="Sprite2D" parent="." unique_id=5895044]
+position = Vector2(107.999985, 82.5)
+scale = Vector2(0.21289063, 0.15332033)
 texture = ExtResource("3_6n5h3")
-expand_mode = 1

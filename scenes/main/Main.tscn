@@ -150,19 +150,16 @@ autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterPanel" unique_id=1196110266]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -571.0
+offset_right = -3.0517578e-05
+offset_bottom = 157.24
 grow_horizontal = 2
-grow_vertical = 2
 alignment = 1
 
-[node name="Clock" parent="CenterPanel/HBoxContainer" unique_id=262250937 instance=ExtResource("4_dc040")]
-custom_minimum_size = Vector2(183.475, 0)
+[node name="Clock2" parent="CenterPanel/HBoxContainer" unique_id=262250937 instance=ExtResource("4_dc040")]
+custom_minimum_size = Vector2(211.305, 0)
 layout_mode = 2
-seconds_per_hour = 3.0
-metadata/_edit_use_anchors_ = true
 
 [node name="RightPanel" type="Control" parent="." unique_id=1345644869]
 layout_mode = 1
