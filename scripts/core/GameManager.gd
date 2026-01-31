@@ -10,7 +10,6 @@ var probabilidad = 0.5
 signal evento_cambiado(evento)
 signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
 signal call_phone(team_to_call)
-signal end_call(team_to_call)
 
 func start_game():
 	GameState.turno = 1
@@ -65,7 +64,6 @@ func new_turn():
 			break
 	# tiempo que dura llamada
 	await get_tree().create_timer(3).timeout
-	emit_signal("end_call",team_to_call)
 	# TODO: elección de mandar información
 	
 	emit_signal("evento_cambiado", {

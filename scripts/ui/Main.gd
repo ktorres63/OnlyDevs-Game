@@ -22,7 +22,6 @@ func _ready() -> void:
 	game_manager.evento_cambiado.connect(mostrar_evento)
 	game_manager.stats_actualizados.connect(_on_stats_actualizados)
 	game_manager.call_phone.connect(call_phone)
-	game_manager.end_call.connect(reset_sprite)
 	game_manager.start_game()
 	phone_blue.disabled = true
 	phone_red.disabled = true
@@ -76,23 +75,11 @@ func _on_decision_tomada(accion: String, bando: String):
 	
 func actualizar_estado_telefono(bando: String):
 	if bando == "Imperio": 
-		phone_red.texture_normal = load("res://assets/sprites/ui/mask_blue.png") # Tu lógica de máscara
+		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png") # Tu lógica de máscara
 		phone_red.disabled = true
 	elif bando == "Resistencia":
-		phone_blue.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
-		phone_blue.disabled = true
-
-func reset_sprite(team):
-	sfx_hangup.play()
-	sfx_ring.stop()
-	sfx_paper_info.play()
-	sfx_static.stop()
-	await get_tree().create_timer(2.0).timeout
-	sfx_hangup.stop()
-	if team == "blue":
 		phone_blue.texture_normal = load("res://assets/sprites/ui/phoneBlue.png")
-	else:
-		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png")
+		phone_blue.disabled = true
 
 func call_phone(evento):
 	var phone
