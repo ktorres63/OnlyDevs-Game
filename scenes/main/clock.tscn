@@ -18,7 +18,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="tickTick" type="AudioStreamPlayer" parent="." unique_id=1405365477]
 stream = ExtResource("5_6n5h3")
+volume_db = -26.0
 autoplay = true
+parameters/looping = true
 
 [node name="base" type="Sprite2D" parent="." unique_id=2066971571]
 position = Vector2(108.47002, 82.22)

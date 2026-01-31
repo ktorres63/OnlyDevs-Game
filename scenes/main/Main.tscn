@@ -151,7 +151,6 @@ layout_mode = 2
 theme_override_constants/separation = 295
 
 [node name="Clock" parent="HBoxContainer/VBoxContainer2" unique_id=262250937 instance=ExtResource("4_dc040")]
-clip_contents = false
 custom_minimum_size = Vector2(215, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -185,6 +184,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1112756506]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Sospecha"
 horizontal_alignment = 1
 
