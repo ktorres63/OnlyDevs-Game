@@ -73,24 +73,6 @@ func new_turn():
 		"opciones": ["Imperio", "Resistencia"]
 	})
 
-func elegir_opcion(opcion):
-	if opcion == "Imperio":
-		GameState.dinero += 200
-		GameState.sospecha_Imperio += 15
-		GameState.sospecha_Resistencia += 5
-	else:
-		GameState.dinero += 100
-		GameState.sospecha_Resistencia += 15
-		GameState.sospecha_Imperio += 5
-		
-	GameState.sospecha_Imperio = clamp(GameState.sospecha_Imperio, 0, MAX_SOSPECHA)
-	GameState.sospecha_Resistencia = clamp(GameState.sospecha_Resistencia, 0, MAX_SOSPECHA)
-	
-	GameState.turno +=1
-	emit_stats()
-	new_turn()
-		
-
 func checkFinal():
 	if GameState.dinero >= OBJETIVO_DINERO:
 		print("VICTORIA")
