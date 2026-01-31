@@ -74,6 +74,7 @@ func new_turn():
 	})
 
 func elegir_opcion(opcion):
+	print("no me borres, ayuda")
 	if opcion == "Imperio":
 		GameState.dinero += 200
 		GameState.sospecha_Imperio += 15
