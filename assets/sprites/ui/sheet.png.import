@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dosj2dko67er4"
-path="res://.godot/imported/NOMBRE DE JUEGO.png-d740bfe03bb9886629bf2a8dd64ab1a6.ctex"
+uid="uid://b6ibxs5ltw8io"
+path="res://.godot/imported/sheet.png-b9d467c851541dc26fba480a809b4494.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/NOMBRE DE JUEGO.png"
-dest_files=["res://.godot/imported/NOMBRE DE JUEGO.png-d740bfe03bb9886629bf2a8dd64ab1a6.ctex"]
+source_file="res://assets/sprites/ui/sheet.png"
+dest_files=["res://.godot/imported/sheet.png-b9d467c851541dc26fba480a809b4494.ctex"]
 
 [params]
 

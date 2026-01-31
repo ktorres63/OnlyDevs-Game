@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dosj2dko67er4"
-path="res://.godot/imported/NOMBRE DE JUEGO.png-d740bfe03bb9886629bf2a8dd64ab1a6.ctex"
+uid="uid://cseg0sua38dle"
+path="res://.godot/imported/Dollar_Sign.png-8ee0f6917d5658b3a8939fde8afe1cee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/NOMBRE DE JUEGO.png"
-dest_files=["res://.godot/imported/NOMBRE DE JUEGO.png-d740bfe03bb9886629bf2a8dd64ab1a6.ctex"]
+source_file="res://assets/sprites/ui/Dollar_Sign.png"
+dest_files=["res://.godot/imported/Dollar_Sign.png-8ee0f6917d5658b3a8939fde8afe1cee.ctex"]
 
 [params]
 

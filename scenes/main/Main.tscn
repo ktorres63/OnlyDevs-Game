@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bly1onl4wdn1i" path="res://assets/audio/paper1.wav" id="10_paper_info"]
 [ext_resource type="AudioStream" uid="uid://biwc73jdwsalr" path="res://assets/audio/paper2.wav" id="11_paper_sell"]
 [ext_resource type="AudioStream" uid="uid://v8uiy83yu86e" path="res://assets/audio/radio_static.wav" id="12_static"]
+[ext_resource type="Texture2D" uid="uid://bacryx6fivq0x" path="res://assets/sprites/ui/rebellion_logo.png" id="16_hjnkw"]
 
 [node name="Main" type="Control" unique_id=1647585048]
 layout_mode = 3
@@ -95,12 +96,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 155
+theme_override_constants/separation = 125
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1724329661]
 layout_mode = 2
-theme_override_constants/separation = 290
+theme_override_constants/separation = 350
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1216936912]
@@ -115,6 +116,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_sjxhf")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=63828800]
 layout_mode = 2
@@ -149,7 +151,8 @@ layout_mode = 2
 theme_override_constants/separation = 295
 
 [node name="Clock" parent="HBoxContainer/VBoxContainer2" unique_id=262250937 instance=ExtResource("4_dc040")]
-custom_minimum_size = Vector2(120, 0)
+clip_contents = false
+custom_minimum_size = Vector2(215, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -168,16 +171,34 @@ autowrap_mode = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer" unique_id=133630349]
 layout_mode = 2
-theme_override_constants/separation = 340
+theme_override_constants/separation = 250
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3" unique_id=1748784837]
 layout_mode = 2
 
-[node name="SuspicionBarBlue" type="ProgressBar" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=61183635]
-custom_minimum_size = Vector2(300, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=578253871]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=891154159]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1112756506]
+layout_mode = 2
+text = "Sospecha"
+horizontal_alignment = 1
+
+[node name="SuspicionBarBlue" type="ProgressBar" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=61183635]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=1727755498]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("16_hjnkw")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PhoneBlue" type="TextureButton" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=215396894]
 custom_minimum_size = Vector2(300, 300)
