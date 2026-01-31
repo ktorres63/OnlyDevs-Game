@@ -90,8 +90,8 @@ func call_phone(evento):
 		phone = phone_red
 		phone_red.disabled = false
 
-	if not sfx_ring.playing:
-		sfx_ring.play()
+	sfx_ring.stop()
+	sfx_ring.play()
 
 	UIAnimations.shake(phone)	
 		
