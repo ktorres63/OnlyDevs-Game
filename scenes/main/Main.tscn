@@ -8,14 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://c5nr3j33o4vg6" path="res://scenes/main/clock.tscn" id="4_dc040"]
 [ext_resource type="Texture2D" uid="uid://qfvp1lvd82sn" path="res://assets/sprites/ui/phoneBlue.png" id="4_gyg6b"]
 [ext_resource type="Texture2D" uid="uid://b7dcnqyktrq32" path="res://assets/sprites/ui/eagles.png" id="4_sjxhf"]
-[ext_resource type="AudioStream" uid="uid://cs2v7x1x7k6xq" path="res://assets/audio/phone_ring.wav" id="5_ring"]
-[ext_resource type="AudioStream" uid="uid://d5gk4t4v0m7xk" path="res://assets/audio/phone_pickup.mp3" id="6_pickup"]
-[ext_resource type="AudioStream" uid="uid://d1gn3g6b4m2m0" path="res://assets/audio/phone_hangup.wav" id="7_hangup"]
-[ext_resource type="AudioStream" uid="uid://b30n4r8b1kq7m" path="res://assets/audio/ui_click.wav" id="8_click"]
-[ext_resource type="AudioStream" uid="uid://c1m7v4b1y0t0q" path="res://assets/audio/ambience_office.mp3" id="9_ambience"]
-[ext_resource type="AudioStream" uid="uid://b1p7xk1t0r7tq" path="res://assets/audio/paper1.wav" id="10_paper_info"]
-[ext_resource type="AudioStream" uid="uid://c8r6p0n4k6y2m" path="res://assets/audio/paper2.wav" id="11_paper_sell"]
-[ext_resource type="AudioStream" uid="uid://d8g4y1m5q3r2t" path="res://assets/audio/radio_static.wav" id="12_static"]
+[ext_resource type="AudioStream" uid="uid://cjerski3oqbim" path="res://assets/audio/phone_ring.wav" id="5_ring"]
+[ext_resource type="AudioStream" uid="uid://bnvuhe52dpgkl" path="res://assets/audio/phone_pickup.mp3" id="6_pickup"]
+[ext_resource type="AudioStream" uid="uid://bikb76kp4an8b" path="res://assets/audio/phone_hangup.wav" id="7_hangup"]
+[ext_resource type="AudioStream" uid="uid://cjby4j5l8imy5" path="res://assets/audio/ui_click.wav" id="8_click"]
+[ext_resource type="AudioStream" uid="uid://bvug6yx0khna6" path="res://assets/audio/ambience_office.mp3" id="9_ambience"]
+[ext_resource type="AudioStream" uid="uid://bly1onl4wdn1i" path="res://assets/audio/paper1.wav" id="10_paper_info"]
+[ext_resource type="AudioStream" uid="uid://biwc73jdwsalr" path="res://assets/audio/paper2.wav" id="11_paper_sell"]
+[ext_resource type="AudioStream" uid="uid://v8uiy83yu86e" path="res://assets/audio/radio_static.wav" id="12_static"]
+[ext_resource type="Texture2D" uid="uid://bacryx6fivq0x" path="res://assets/sprites/ui/rebellion_logo.png" id="16_hjnkw"]
 
 [node name="Main" type="Control" unique_id=1647585048]
 layout_mode = 3
@@ -59,36 +60,32 @@ color = Color(0, 0, 0, 0.1254902)
 [node name="GameManager" type="Node" parent="." unique_id=1237323366]
 script = ExtResource("2_q24mn")
 
-[node name="SfxRing" type="AudioStreamPlayer" parent="."]
+[node name="SfxRing" type="AudioStreamPlayer" parent="." unique_id=1923182175]
 stream = ExtResource("5_ring")
-volume_db = 0.0
 
-[node name="SfxPickup" type="AudioStreamPlayer" parent="."]
+[node name="SfxPickup" type="AudioStreamPlayer" parent="." unique_id=762644541]
 stream = ExtResource("6_pickup")
 volume_db = -8.0
 
-[node name="SfxHangup" type="AudioStreamPlayer" parent="."]
+[node name="SfxHangup" type="AudioStreamPlayer" parent="." unique_id=973208130]
 stream = ExtResource("7_hangup")
 volume_db = -8.0
 
-[node name="SfxClick" type="AudioStreamPlayer" parent="."]
+[node name="SfxClick" type="AudioStreamPlayer" parent="." unique_id=1228408921]
 stream = ExtResource("8_click")
-volume_db = 0.0
 
-[node name="SfxAmbience" type="AudioStreamPlayer" parent="."]
+[node name="SfxAmbience" type="AudioStreamPlayer" parent="." unique_id=412961266]
 stream = ExtResource("9_ambience")
 volume_db = -12.0
 autoplay = true
 
-[node name="SfxPaperInfo" type="AudioStreamPlayer" parent="."]
+[node name="SfxPaperInfo" type="AudioStreamPlayer" parent="." unique_id=563951307]
 stream = ExtResource("10_paper_info")
-volume_db = 0.0
 
-[node name="SfxPaperSell" type="AudioStreamPlayer" parent="."]
+[node name="SfxPaperSell" type="AudioStreamPlayer" parent="." unique_id=476871328]
 stream = ExtResource("11_paper_sell")
-volume_db = 0.0
 
-[node name="SfxStatic" type="AudioStreamPlayer" parent="."]
+[node name="SfxStatic" type="AudioStreamPlayer" parent="." unique_id=809065851]
 stream = ExtResource("12_static")
 volume_db = -6.0
 
@@ -99,12 +96,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 155
+theme_override_constants/separation = 125
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1724329661]
 layout_mode = 2
-theme_override_constants/separation = 290
+theme_override_constants/separation = 350
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1216936912]
@@ -119,6 +116,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_sjxhf")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=63828800]
 layout_mode = 2
@@ -172,16 +170,34 @@ autowrap_mode = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer" unique_id=133630349]
 layout_mode = 2
-theme_override_constants/separation = 340
+theme_override_constants/separation = 250
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3" unique_id=1748784837]
 layout_mode = 2
 
-[node name="SuspicionBarBlue" type="ProgressBar" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=61183635]
-custom_minimum_size = Vector2(300, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=578253871]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=891154159]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1112756506]
+layout_mode = 2
+text = "Sospecha"
+horizontal_alignment = 1
+
+[node name="SuspicionBarBlue" type="ProgressBar" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=61183635]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=1727755498]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("16_hjnkw")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PhoneBlue" type="TextureButton" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=215396894]
 custom_minimum_size = Vector2(300, 300)

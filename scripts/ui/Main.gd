@@ -7,7 +7,7 @@ extends Control
 @onready var phone_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/PhoneBlue
 @onready var game_manager = $GameManager
 @onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
-@onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/SuspicionBarBlue
+@onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer/SuspicionBarBlue
 @onready var sfx_ring = $SfxRing
 @onready var sfx_hangup = $SfxHangup
 @onready var sfx_click = $SfxClick
