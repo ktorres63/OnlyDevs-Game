@@ -71,7 +71,7 @@ var current_mask
 signal evento_cambiado(evento)
 signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
 signal call_phone(team_to_call)
-
+signal missed_call(team)
 
 func obtener_evento_aleatorio():
 	var pool = []
@@ -108,42 +108,56 @@ func answer_phone(phone):
 	answered_phone = phone
 	
 func new_turn():
+	var team_to_call: String
+	var if_contesto:bool = false 
+	
 	if (GameState.turno > MAX_TURNOS):
 		checkFinal()
 		return
 	print("comienzo turno")
+	
 	# TODO: llegada de información
 	
 	
 	await get_tree().create_timer(randf_range(5, 10)).timeout
 	#Realizar llamada
-	var team_to_call
 	if probabilidad < 0.3 or probabilidad > 0.7:
 		probabilidad = 0.5
+		
 	if randf_range(0, 1) > probabilidad:
 		team_to_call = "blue"
-		probabilidad -= 0.2
+		probabilidad += 0.2
 	else:
 		team_to_call = "red"
-		probabilidad += 0.2
-	
-	for i in range(20):
+		probabilidad -= 0.2
+		
+	#cantidad de ring ring's xd
+	for i in range(3):
 		print("lamando ", team_to_call, " ", i)
 		emit_signal("call_phone", {"team_to_call": team_to_call})
 		await get_tree().create_timer(1).timeout
 		if answered_phone == team_to_call:
 			print("[-] contestado ",answered_phone, "con mascara: ", mask_selector.mask_label.text)    
+			#ahora usamos la variable para verificar que se contestó
 			answered_phone = ""
+			if_contesto = true
 			break
-		
-	# tiempo que dura llamada
-	await get_tree().create_timer(3).timeout
-	# TODO: elección de mandar información
 	
+	#mecanica de llamada perdida
+	if if_contesto:
+		# tiempo que dura llamada
+		await get_tree().create_timer(3).timeout
+	
+	# TODO: elección de mandar información
+	print("antes del evento")
 	var evento = obtener_evento_aleatorio()
-
+	answered_phone = ""
 	emit_signal("evento_cambiado", evento)
-
+	print("despues del evento")
+	if !if_contesto:
+		print("  - no contestaste pa, te cae multa")
+		emit_signal("missed_call",team_to_call)
+	
 
 func checkFinal():
 	if GameState.dinero >= OBJETIVO_DINERO:

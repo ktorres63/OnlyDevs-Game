@@ -222,7 +222,6 @@ autowrap_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=514290114]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_top = 21
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=133630349]
 layout_mode = 2
@@ -236,6 +235,7 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=891154159]
 layout_mode = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1112756506]
 layout_mode = 2

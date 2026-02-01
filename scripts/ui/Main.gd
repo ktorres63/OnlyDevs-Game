@@ -22,6 +22,7 @@ func _ready() -> void:
 	game_manager.evento_cambiado.connect(mostrar_evento)
 	game_manager.stats_actualizados.connect(_on_stats_actualizados)
 	game_manager.call_phone.connect(call_phone)
+	game_manager.missed_call.connect(missed_call)
 	game_manager.start_game()
 	phone_blue.disabled = true
 	phone_red.disabled = true
@@ -47,10 +48,7 @@ func _on_phone_red_pressed():
 	game_manager.answer_phone("red")
 	mostrar_panel_decision("Imperio", phone_red)
 	phone_red.texture_normal = load("res://assets/sprites/ui/phone_red_call.png")
-	phone_red.disabled = true	
 	
-	# TODO: cambiar por url al sprite de telefono descolgado
-
 func _on_phone_blue_pressed():
 	sfx_click.play()
 	sfx_ring.stop()
@@ -60,7 +58,6 @@ func _on_phone_blue_pressed():
 	game_manager.answer_phone("blue")
 	mostrar_panel_decision("Resistencia", phone_blue)
 	phone_blue.texture_normal = load("res://assets/sprites/ui/phone_blue_call.png")
-	phone_blue.disabled = true
 
 func mostrar_panel_decision(bando: String, boton_telefono: Control):
 	var panel = PANEL_DECISION_SCENE.instantiate()
@@ -73,11 +70,21 @@ func _on_decision_tomada(accion: String, bando: String):
 	game_manager.procesar_accion_telefono(accion, bando)
 	actualizar_estado_telefono(bando)
 	
+func missed_call(bando):
+	if bando == "red":
+		GameState.sospecha_Imperio += 30
+	else:
+		GameState.sospecha_Resistencia += 30
+	actualizar_estado_telefono(bando)
+	game_manager.emit_stats()
+	GameState.turno += 1
+	game_manager.new_turn()
+	 
 func actualizar_estado_telefono(bando: String):
-	if bando == "Imperio": 
-		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png") # Tu lógica de máscara
+	if bando == "Imperio" || bando == "red" : 
+		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png")
 		phone_red.disabled = true
-	elif bando == "Resistencia":
+	elif bando == "Resistencia" || bando == "blue":
 		phone_blue.texture_normal = load("res://assets/sprites/ui/phoneBlue.png")
 		phone_blue.disabled = true
 
