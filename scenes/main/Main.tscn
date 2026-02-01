@@ -307,5 +307,16 @@ offset_top = 661.0
 offset_right = 1274.0
 offset_bottom = 711.0
 
+[node name="BtnHuir" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 540.0
+offset_top = 610.0
+offset_right = 740.0
+offset_bottom = 660.0
+theme_override_font_sizes/font_size = 24
+text = "¡HUIR!"
+
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed" to="." method="_on_phone_red_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue" to="." method="_on_phone_blue_pressed"]
+[connection signal="pressed" from="BtnHuir" to="." method="_on_btn_huir_pressed"]
