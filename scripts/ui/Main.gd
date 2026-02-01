@@ -103,6 +103,7 @@ func missed_call(bando):
 	game_manager.new_turn()
 	 
 func actualizar_estado_telefono(bando: String):
+	sfx_static.stop()
 	if bando == "Imperio" || bando == "red" : 
 		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png")
 		phone_red.disabled = true
