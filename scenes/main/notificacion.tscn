@@ -25,11 +25,11 @@ size_flags_vertical = 3
 script = ExtResource("1_5jvb7")
 
 [node name="ColorRect" type="Panel" parent="." unique_id=1840168761]
-custom_minimum_size = Vector2(620, 50)
 layout_mode = 0
 offset_left = 5.0
-offset_right = 535.0
-offset_bottom = 50.0
+offset_top = 5.0
+offset_right = 625.0
+offset_bottom = 45.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vorgs")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1967040935]
@@ -46,5 +46,5 @@ stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=2071379982]
 layout_mode = 2
-theme_override_font_sizes/font_size = 23
+theme_override_font_sizes/font_size = 21
 text = "Haz recibido nueva información, revisa tu folder"

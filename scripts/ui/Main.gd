@@ -15,6 +15,9 @@ extends Control
 @onready var sfx_paper_sell = $SfxPaperSell
 @onready var sfx_static = $SfxStatic
 @onready var folder = $TextureRect2	
+@onready var mask_selector = $HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel
+@onready var notificacion = $Notificacion
+
 
 const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
 
@@ -49,9 +52,16 @@ func _on_phone_red_pressed():
 	sfx_paper_sell.play()
 	if not sfx_static.playing:
 		sfx_static.play()
-	game_manager.answer_phone("red")
-	mostrar_panel_decision("Imperio", phone_red)
+	game_manager.answer_phone("Imperio")
 	phone_red.texture_normal = load("res://assets/sprites/ui/phone_red_call.png")
+		
+	if "Imperio" != mask_selector.mask_label.text:
+		notificacion.mostrar("error_mascara")
+		# no se deberia de usar missed call pero sirve para poder aplicar la penalización
+		missed_call("Imperio")
+		return
+		
+	mostrar_panel_decision("Imperio", phone_red)
 	
 func _on_phone_blue_pressed():
 	sfx_click.play()
@@ -59,9 +69,17 @@ func _on_phone_blue_pressed():
 	sfx_paper_sell.play()
 	if not sfx_static.playing:
 		sfx_static.play()
-	game_manager.answer_phone("blue")
-	mostrar_panel_decision("Resistencia", phone_blue)
+		
+	game_manager.answer_phone("Resistencia")
 	phone_blue.texture_normal = load("res://assets/sprites/ui/phone_blue_call.png")
+	
+	if "Resistencia" != mask_selector.mask_label.text:
+		notificacion.mostrar("error_mascara")
+		# no se deberia de usar missed call pero sirve para poder aplicar la penalización
+		missed_call("Resistencia")
+		return
+	
+	mostrar_panel_decision("Resistencia", phone_blue)
 
 func mostrar_panel_decision(bando: String, boton_telefono: Control):
 	var panel = PANEL_DECISION_SCENE.instantiate()
@@ -75,7 +93,7 @@ func _on_decision_tomada(accion: String, bando: String):
 	actualizar_estado_telefono(bando)
 	
 func missed_call(bando):
-	if bando == "red":
+	if bando == "Imperio":
 		GameState.sospecha_Imperio += 30
 	else:
 		GameState.sospecha_Resistencia += 30
@@ -100,7 +118,7 @@ func actualizar_estado_folder():
 
 func call_phone(evento):
 	var phone
-	if evento.team_to_call == "blue":
+	if evento.team_to_call == "Resistencia":
 		phone = phone_blue
 		phone_blue.disabled = false
 	else:

@@ -125,10 +125,10 @@ func new_turn():
 		probabilidad = 0.5
 		
 	if randf_range(0, 1) > probabilidad:
-		team_to_call = "blue"
+		team_to_call = "Imperio"
 		probabilidad += 0.2
 	else:
-		team_to_call = "red"
+		team_to_call = "Resistencia"
 		probabilidad -= 0.2
 		
 	#cantidad de ring ring's xd
@@ -138,7 +138,8 @@ func new_turn():
 		await get_tree().create_timer(1).timeout
 		if answered_phone == team_to_call:
 			print("[-] contestado ",answered_phone, "con mascara: ", mask_selector.mask_label.text)    
-			#ahora usamos la variable para verificar que se contestó
+			if team_to_call != mask_selector.mask_label.text:
+				return
 			answered_phone = ""
 			if_contesto = true
 			break
