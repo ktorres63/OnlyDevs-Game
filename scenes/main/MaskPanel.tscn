@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://du12ll2vp3rw2"]
 
 [ext_resource type="Texture2D" uid="uid://cadk6lfuyhw8r" path="res://assets/sprites/ui/Redmask.png" id="1_o3lvv"]
-[ext_resource type="Script" path="res://scripts/ui/maskPanel.gd" id="1_wqs35"]
+[ext_resource type="Script" uid="uid://8hbsoijcspiq" path="res://scripts/ui/maskPanel.gd" id="1_wqs35"]
 [ext_resource type="Texture2D" uid="uid://d0rnngr6b6tti" path="res://assets/sprites/ui/switch.png" id="2_wqs35"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3lvv"]

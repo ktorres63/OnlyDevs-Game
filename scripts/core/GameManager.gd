@@ -4,8 +4,11 @@ const MAX_TURNOS: int = 24
 const OBJETIVO_DINERO: int = 1000
 const MAX_SOSPECHA: int = 100
 
+@onready var mask_selector = $"../HBoxContainer/VBoxContainer/MascaraPanel"
+
 var answered_phone
 var probabilidad = 0.5
+var current_mask
 
 signal evento_cambiado(evento)
 signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
@@ -17,6 +20,7 @@ func start_game():
 	GameState.sospecha_Imperio = 0
 	GameState.sospecha_Resistencia = 0
 	GameState.mascara_actual = GameState.Mascara.IMPERIO
+
 	emit_stats()
 	new_turn()
 
@@ -59,9 +63,10 @@ func new_turn():
 		emit_signal("call_phone",{"team_to_call":team_to_call})	
 		await get_tree().create_timer(1).timeout
 		if answered_phone == team_to_call:
-			print("[-] contestado ",answered_phone)
+			print("[-] contestado ",answered_phone, "con mascara: ", mask_selector.mask_label.text)    
 			answered_phone = ""
 			break
+		
 	# tiempo que dura llamada
 	await get_tree().create_timer(3).timeout
 	# TODO: elección de mandar información

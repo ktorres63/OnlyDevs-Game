@@ -17,7 +17,6 @@ func _ready() -> void:
 	update_ui()
 	change_button.pressed.connect(_on_change_pressed)
 
-
 func _on_change_pressed () -> void:
 	if current_mask == Mask.IMPERIO:
 		current_mask = Mask.RESISTENCIA
@@ -26,7 +25,6 @@ func _on_change_pressed () -> void:
 	update_ui()
 	emit_signal("mask_changed", current_mask)
 	
-
 func update_ui():
 	match current_mask:
 		Mask.IMPERIO:
@@ -35,4 +33,3 @@ func update_ui():
 		Mask.RESISTENCIA:
 			mask_label.text = "Resistencia"
 			mask_image.texture = preload("res://assets/sprites/ui/BlueMask.png")
-	

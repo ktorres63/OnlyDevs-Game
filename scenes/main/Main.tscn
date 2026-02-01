@@ -143,7 +143,7 @@ texture_normal = ExtResource("3_q24mn")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Control" parent="HBoxContainer/VBoxContainer" unique_id=1258673724 instance=ExtResource("15_rikml")]
+[node name="MascaraPanel" parent="HBoxContainer/VBoxContainer" unique_id=1258673724 instance=ExtResource("15_rikml")]
 custom_minimum_size = Vector2(316.5, 244)
 layout_mode = 2
 size_flags_horizontal = 4
