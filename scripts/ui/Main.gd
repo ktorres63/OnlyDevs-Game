@@ -46,7 +46,7 @@ func _on_phone_red_pressed():
 		sfx_static.play()
 	game_manager.answer_phone("red")
 	mostrar_panel_decision("Imperio", phone_red)
-	phone_red.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
+	phone_red.texture_normal = load("res://assets/sprites/ui/phone_red_call.png")
 	phone_red.disabled = true	
 	
 	# TODO: cambiar por url al sprite de telefono descolgado
@@ -59,7 +59,7 @@ func _on_phone_blue_pressed():
 		sfx_static.play()
 	game_manager.answer_phone("blue")
 	mostrar_panel_decision("Resistencia", phone_blue)
-	phone_blue.texture_normal = load("res://assets/sprites/ui/mask_blue.png")
+	phone_blue.texture_normal = load("res://assets/sprites/ui/phone_blue_call.png")
 	phone_blue.disabled = true
 
 func mostrar_panel_decision(bando: String, boton_telefono: Control):

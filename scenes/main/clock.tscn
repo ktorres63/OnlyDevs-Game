@@ -13,6 +13,8 @@ anchor_bottom = 0.22222224
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_j0qyj")
 metadata/_edit_use_anchors_ = true
 
@@ -23,16 +25,16 @@ autoplay = true
 parameters/looping = true
 
 [node name="base" type="Sprite2D" parent="." unique_id=2066971571]
-position = Vector2(108.47002, 82.22)
-scale = Vector2(0.21197264, 0.15972656)
+position = Vector2(80, 60)
+scale = Vector2(0.162, 0.122)
 texture = ExtResource("1_2skdo")
 
 [node name="Hand_Long2" type="Sprite2D" parent="." unique_id=981795310]
-position = Vector2(107, 81.5)
-scale = Vector2(0.20507813, 0.16113281)
+position = Vector2(80, 60)
+scale = Vector2(0.155, 0.122)
 texture = ExtResource("2_j0qyj")
 
 [node name="Hand_Short2" type="Sprite2D" parent="." unique_id=5895044]
-position = Vector2(107.999985, 82.5)
-scale = Vector2(0.21289063, 0.15332033)
+position = Vector2(80, 60)
+scale = Vector2(0.163, 0.117)
 texture = ExtResource("3_6n5h3")
