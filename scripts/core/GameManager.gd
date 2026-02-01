@@ -8,12 +8,6 @@ const MAX_SOSPECHA: int = 100
 
 var EVENTOS = [
 	{
-		"id": "rutas_suministro",
-		"texto": "Interceptamos rutas de suministro militar activas.",
-		"opciones": ["Vender al Imperio", "Vender a la Resistencia"],
-		"peso": 3
-	},
-	{
 		"id": "frecuencias_radio",
 		"texto": "Desciframos frecuencias de radio cifradas.",
 		"opciones": ["Entregar al Imperio", "Entregar a la Resistencia"],
@@ -73,6 +67,7 @@ signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
 signal call_phone(team_to_call)
 signal missed_call(team)
 
+# TODO: reducir consumo de memoria de esta función
 func obtener_evento_aleatorio():
 	var pool = []
 
@@ -89,6 +84,9 @@ func start_game():
 	GameState.sospecha_Imperio = 0
 	GameState.sospecha_Resistencia = 0
 	GameState.mascara_actual = GameState.Mascara.IMPERIO
+	
+	GameState.informacion_recibida.append(obtener_evento_aleatorio())
+	GameState.informacion_recibida.append(obtener_evento_aleatorio())
 
 	emit_stats()
 	new_turn()
@@ -102,7 +100,7 @@ func emit_stats():
 		 GameState.sospecha_Imperio,
 		 GameState.sospecha_Resistencia
 		)
-		
+	
 
 func answer_phone(phone):
 	answered_phone = phone
@@ -151,6 +149,8 @@ func new_turn():
 	# TODO: elección de mandar información
 	print("antes del evento")
 	var evento = obtener_evento_aleatorio()
+	print(evento)
+	print(EVENTOS[0].texto)
 	answered_phone = ""
 	emit_signal("evento_cambiado", evento)
 	print("despues del evento")

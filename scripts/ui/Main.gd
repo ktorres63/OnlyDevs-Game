@@ -1,8 +1,8 @@
 extends Control
 
 @onready var money_label = $Control/MoneyLabel
-@onready var turn_label = $HBoxContainer/VBoxContainer2/TurnLabel
-@onready var event_text = $HBoxContainer/VBoxContainer2/EventPanel/EventText
+@onready var turn_label = $HBoxContainer/VBoxContainer2/VBoxContainer/TurnLabel
+@onready var event_text = $HBoxContainer/VBoxContainer2/VBoxContainer/EventPanel/EventText
 @onready var phone_red = $HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed
 @onready var phone_blue = $HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue
 @onready var game_manager = $GameManager
@@ -14,6 +14,7 @@ extends Control
 @onready var sfx_paper_info = $SfxPaperInfo
 @onready var sfx_paper_sell = $SfxPaperSell
 @onready var sfx_static = $SfxStatic
+#@onready var folder = $CenterContainer2/TextureRect2
 
 const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
 
@@ -87,6 +88,10 @@ func actualizar_estado_telefono(bando: String):
 	elif bando == "Resistencia" || bando == "blue":
 		phone_blue.texture_normal = load("res://assets/sprites/ui/phoneBlue.png")
 		phone_blue.disabled = true
+
+func actualizar_estado_folder(cantidad: int):
+	if (cantidad == 0)
+		folder
 
 func call_phone(evento):
 	var phone
