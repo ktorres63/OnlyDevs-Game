@@ -14,7 +14,7 @@ extends Control
 @onready var sfx_paper_info = $SfxPaperInfo
 @onready var sfx_paper_sell = $SfxPaperSell
 @onready var sfx_static = $SfxStatic
-#@onready var folder = $CenterContainer2/TextureRect2
+@onready var folder = $TextureRect2	
 
 const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
 
@@ -39,6 +39,7 @@ func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistenci
 	
 	suspicion_bar_red.value = sospecha_imperio
 	suspicion_bar_blue.value = sospecha_resistencia
+	actualizar_estado_folder()
 
 func _on_phone_red_pressed():
 	sfx_click.play()
@@ -89,9 +90,11 @@ func actualizar_estado_telefono(bando: String):
 		phone_blue.texture_normal = load("res://assets/sprites/ui/phoneBlue.png")
 		phone_blue.disabled = true
 
-func actualizar_estado_folder(cantidad: int):
-	if (cantidad == 0)
-		folder
+func actualizar_estado_folder():
+	if (GameState.informacion_recibida.is_empty()):
+		folder.texture = load("res://assets/sprites/ui/empty_folder.png")	
+	else:
+		folder.texture = load("res://assets/sprites/ui/folder.png")
 
 func call_phone(evento):
 	var phone

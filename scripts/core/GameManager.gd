@@ -84,9 +84,6 @@ func start_game():
 	GameState.sospecha_Imperio = 0
 	GameState.sospecha_Resistencia = 0
 	GameState.mascara_actual = GameState.Mascara.IMPERIO
-	
-	GameState.informacion_recibida.append(obtener_evento_aleatorio())
-	GameState.informacion_recibida.append(obtener_evento_aleatorio())
 
 	emit_stats()
 	new_turn()
@@ -100,7 +97,6 @@ func emit_stats():
 		 GameState.sospecha_Imperio,
 		 GameState.sospecha_Resistencia
 		)
-	
 
 func answer_phone(phone):
 	answered_phone = phone
@@ -115,7 +111,9 @@ func new_turn():
 	print("comienzo turno")
 	
 	# TODO: llegada de información
-	
+	var evento = obtener_evento_aleatorio()
+	GameState.informacion_recibida.append(evento)
+	# que llegue notificación
 	
 	await get_tree().create_timer(randf_range(5, 10)).timeout
 	#Realizar llamada
@@ -147,18 +145,13 @@ func new_turn():
 		await get_tree().create_timer(3).timeout
 	
 	# TODO: elección de mandar información
-	print("antes del evento")
-	var evento = obtener_evento_aleatorio()
-	print(evento)
-	print(EVENTOS[0].texto)
 	answered_phone = ""
 	emit_signal("evento_cambiado", evento)
-	print("despues del evento")
+
 	if !if_contesto:
 		print("  - no contestaste pa, te cae multa")
 		emit_signal("missed_call",team_to_call)
-	
-
+		
 func checkFinal():
 	if GameState.dinero >= OBJETIVO_DINERO:
 		print("VICTORIA")
