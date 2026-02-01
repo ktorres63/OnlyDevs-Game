@@ -3,6 +3,7 @@ extends Control
 const msg_llegada_informacion = "Haz recibido nueva información, revisa tu folder"
 const msg_llamada_perdida =     "No contestaste la llamada, incrementan las sospechas"
 const msg_error_mascara =       "No usaste la mascara correcta"
+const msg_dinero_suficiente =   "¡Tienes suficiente dinero! Puedes HUIR ahora o arriesgarte"
 const duracion:int = 3
 
 @onready var text_label = $HBoxContainer/Label
@@ -15,6 +16,8 @@ func mostrar(tipo):
 			text_label.text = msg_llamada_perdida	
 		"error_mascara":
 			text_label.text = msg_error_mascara
+		"dinero_suficiente":
+			text_label.text = msg_dinero_suficiente
 	
 	visible = true
 	await get_tree().create_timer(duracion).timeout
