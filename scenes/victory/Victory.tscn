@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvqkxr3fub68f"]
+[gd_scene load_steps=3 format=3 uid="uid://bvqkxr3fub68f"]
 
 [ext_resource type="Script" path="res://scripts/ui/Victory.gd" id="1_victory"]
+[ext_resource type="AudioStream" uid="uid://you_win_audio" path="res://assets/audio/you_win.ogg" id="2_you_win"]
 
 [node name="Victory" type="Control"]
 layout_mode = 3
@@ -10,6 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_victory")
+
+[node name="SfxYouWin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_you_win")
+volume_db = -3.0
+autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
