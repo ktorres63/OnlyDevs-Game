@@ -15,12 +15,13 @@ func update_stats():
 		reason_label.text = "¡El Imperio descubrió tu identidad!"
 	elif GameState.sospecha_Resistencia >= 100:
 		reason_label.text = "¡La Resistencia descubrió tu identidad!"
+	elif GameState.turno > 24:
+		reason_label.text = "¡Quedaste atrapado en la guerra!"
 	else:
-		reason_label.text = "No lograste el objetivo de dinero a tiempo"
+		reason_label.text = "No lograste escapar a tiempo"
 
 func _on_restart_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
 
 func _on_menu_button_pressed():
-	# Por ahora regresa al Main, puedes cambiar esto si creas un menú principal
-	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu_inicio/menu_inicio.tscn")
