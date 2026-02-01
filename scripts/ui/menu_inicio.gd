@@ -1,13 +1,12 @@
 extends Control
 
-# Cambiar a "res://scenes/introduction/Intro.tscn" cuando la intro funcione
-const JUEGO = "res://scenes/main/Main.tscn"
+const JUEGO = "res://scenes/introduction/Intro.tscn"
 
 @onready var panel_creditos = $PanelCreditos
 @onready var menu_botones = $CenterContainer/VBoxContainer
 
 func _on_button_2_button_down():
-	get_tree().change_scene_to_file(JUEGO)
+	SceneTransition.change_scene_with_fade(JUEGO, 0.8)
 
 func _on_btn_creditos_pressed():
 	menu_botones.visible = false

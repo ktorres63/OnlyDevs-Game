@@ -1,35 +1,88 @@
 extends Control
 
-const DIALOGUE = preload("res://assets/dialogs/intro.dialogue")
+# Sistema de intro tipo novela visual (sin DialogueManager)
+
+# Imágenes de la historia
+var images := [
+	preload("res://assets/sprites/story/img1.jpg"),
+	preload("res://assets/sprites/story/img2.jpg"),
+	preload("res://assets/sprites/story/img3.jpg"),
+	preload("res://assets/sprites/story/img4.jpg"),
+	preload("res://assets/sprites/story/img5.jpg"),
+]
+
+# Textos de la historia (basados en el lore de Valcora)
+var dialogues := [
+	"La capital aún funciona... los tranvías circulan, los mercados abren algunas horas.\nPero fuera de las avenidas principales, el país se ha fragmentado.",
+	"El Nuevo Orden tomó el control hace seis meses. Prometieron estabilidad.\nA cambio, exigieron obediencia absoluta. Toques de queda. Censura total.",
+	"En respuesta surgió La Llama Libre. No es un movimiento unificado...\nSon células rebeldes, contrabandistas, desertores. Operan desde las sombras.",
+	"Yo trabajaba en la Central de Comunicaciones. Escuchaba teléfonos que no debían existir.\nLeía documentos que nadie admite haber escrito.",
+	"El final de la guerra se acerca. Necesito juntar suficiente dinero para escapar.\nSolo quien logre irse a tiempo sobrevivirá lo que viene."
+]
+
+var current_index := 0
+var is_typing := false
+var full_text := ""
+var char_index := 0.0
+const CHARS_PER_SECOND := 30.0
+
+var is_transitioning := false
 
 @onready var panel_image: TextureRect = $TextureRect
-
-var images := {
-	"panel_1": preload("res://assets/sprites/story/img1.jpg"),
-	"panel_2": preload("res://assets/sprites/story/img2.jpg"),
-	"panel_3": preload("res://assets/sprites/story/img3.jpg"),
-	"panel_4": preload("res://assets/sprites/story/img4.jpg"),
-	"panel_5": preload("res://assets/sprites/story/img5.jpg"),
-}
+@onready var text_label: RichTextLabel = $RichTextLabel
+@onready var sfx_intro: AudioStreamPlayer = $SfxIntro
+@onready var skip_hint: Label = $SkipHint
 
 func _ready() -> void:
-	DialogueManager.dialogue_started.connect(_on_dialogue_started)
-	DialogueManager.got_dialogue.connect(_on_got_dialogue)
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)  
+	text_label.visible = true
+	text_label.text = ""
+	show_current_slide()
+	sfx_intro.play()
+	# Fade in al iniciar
+	await SceneTransition.fade_in(0.5)
 
-	DialogueManager.show_dialogue_balloon(DIALOGUE)
+func _process(delta: float) -> void:
+	if is_typing:
+		char_index += CHARS_PER_SECOND * delta
+		if char_index >= full_text.length():
+			char_index = full_text.length()
+			is_typing = false
+		text_label.text = full_text.substr(0, int(char_index))
 
-func _on_dialogue_ended(resource: DialogueResource) -> void:
-	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		if is_typing:
+			# Mostrar todo el texto inmediatamente
+			is_typing = false
+			char_index = full_text.length()
+			text_label.text = full_text
+		else:
+			# Avanzar al siguiente slide
+			next_slide()
+	
+	# Skip completo con Escape
+	if event.is_action_pressed("ui_cancel"):
+		skip_intro()
 
+func show_current_slide() -> void:
+	if current_index < images.size():
+		panel_image.texture = images[current_index]
+	if current_index < dialogues.size():
+		full_text = dialogues[current_index]
+		char_index = 0.0
+		is_typing = true
+		text_label.text = ""
 
-func _on_dialogue_started(resource):
-	panel_image.texture = images["panel_1"]
+func next_slide() -> void:
+	current_index += 1
+	if current_index >= dialogues.size():
+		skip_intro()
+	else:
+		show_current_slide()
 
-
-func _on_got_dialogue(line: DialogueLine) -> void:
-	print("Tags: ", line.tags)
-	print("Tag image value: '", line.get_tag_value("image"), "'")
-	var key := line.get_tag_value("image")
-	if key != "" and images.has(key):
-		panel_image.texture = images[key]
+func skip_intro() -> void:
+	if is_transitioning:
+		return
+	is_transitioning = true
+	sfx_intro.stop()
+	SceneTransition.change_scene_with_fade("res://scenes/main/Main.tscn", 0.8)
