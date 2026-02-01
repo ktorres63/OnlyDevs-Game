@@ -1,7 +1,7 @@
 extends Node
 
 const MAX_TURNOS: int = 24
-const OBJETIVO_DINERO: int = 1000
+const OBJETIVO_DINERO: int = 500
 const MAX_SOSPECHA: int = 100
 
 @onready var mask_selector = $"../HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel"
@@ -67,6 +67,7 @@ signal evento_cambiado(evento)
 signal stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia)
 signal call_phone(team_to_call)
 signal missed_call(team)
+signal dinero_suficiente()  # Señal para mostrar botón Huir
 
 # TODO: reducir consumo de memoria de esta función
 func obtener_evento_aleatorio():
@@ -98,6 +99,10 @@ func emit_stats():
 		 GameState.sospecha_Imperio,
 		 GameState.sospecha_Resistencia
 		)
+	
+	# Verificar si alcanzó el objetivo de dinero
+	if GameState.dinero >= OBJETIVO_DINERO:
+		emit_signal("dinero_suficiente")
 
 func answer_phone(phone):
 	answered_phone = phone
@@ -161,14 +166,35 @@ func new_turn():
 	
 		
 func checkFinal():
+	# Si llegó al turno máximo sin escapar, pierde (atrapado en la guerra)
+	print("DERROTA - Atrapado en la guerra")
+	get_tree().change_scene_to_file("res://scenes/game_over/GameOver.tscn")
+
+func check_sospecha():
+	# Verificar si alguna sospecha llegó a 100
+	if GameState.sospecha_Imperio >= MAX_SOSPECHA:
+		print("GAME OVER - El Imperio te descubrió")
+		get_tree().change_scene_to_file("res://scenes/game_over/GameOver.tscn")
+		return true
+	elif GameState.sospecha_Resistencia >= MAX_SOSPECHA:
+		print("GAME OVER - La Resistencia te descubrió")
+		get_tree().change_scene_to_file("res://scenes/game_over/GameOver.tscn")
+		return true
+	return false
+
+func escapar():
+	# Victoria: el jugador decidió huir con suficiente dinero
 	if GameState.dinero >= OBJETIVO_DINERO:
-		print("VICTORIA")
-	else:
-		print("DERROTA")
+		print("VICTORIA - Escapaste con el dinero")
+		get_tree().change_scene_to_file("res://scenes/victory/Victory.tscn")
+	return
 
 func procesar_accion_telefono(accion, bando):
+	# Obtener la máscara actual
+	var mascara_activa = mask_selector.mask_label.text
+	
 	if accion == "Vender":
-		GameState.dinero += 10
+		GameState.dinero += 50
 		print("Información vendida al " + bando + ". Dinero actual: " + str(GameState.dinero))
 		
 		if bando == "Imperio":
@@ -179,13 +205,32 @@ func procesar_accion_telefono(accion, bando):
 	elif accion == "Entregar":
 		print("Información entregada al " + bando)
 		
+		# Si usas la máscara correcta, reduces MÁS sospecha del bando
+		var reduccion_base = 5
+		var reduccion_mascara = 10  # Bonus por usar máscara correcta
+		
 		if bando == "Imperio":
-			GameState.sospecha_Imperio -= 5
+			if mascara_activa == "Imperio":
+				GameState.sospecha_Imperio -= (reduccion_base + reduccion_mascara)
+			else:
+				GameState.sospecha_Imperio -= reduccion_base
 			GameState.sospecha_Resistencia += 5
 		else:
-			GameState.sospecha_Resistencia -= 5
+			if mascara_activa == "Resistencia":
+				GameState.sospecha_Resistencia -= (reduccion_base + reduccion_mascara)
+			else:
+				GameState.sospecha_Resistencia -= reduccion_base
 			GameState.sospecha_Imperio += 5
 	
+	# Asegurar que la sospecha no baje de 0
+	GameState.sospecha_Imperio = max(0, GameState.sospecha_Imperio)
+	GameState.sospecha_Resistencia = max(0, GameState.sospecha_Resistencia)
+	
 	emit_stats()
+	
+	# Verificar si alguna sospecha llegó a 100
+	if check_sospecha():
+		return
+	
 	GameState.turno += 1
 	new_turn()
