@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bacryx6fivq0x" path="res://assets/sprites/ui/rebellion_logo.png" id="16_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://cseg0sua38dle" path="res://assets/sprites/ui/Dollar_Sign.png" id="19_vc03v"]
 [ext_resource type="FontFile" uid="uid://bcu1fdm6gvscc" path="res://assets/fonts/PressStart2P-Regular.ttf" id="20_grv7h"]
+[ext_resource type="PackedScene" uid="uid://ds64ba6ii1ibo" path="res://scenes/main/notificacion.tscn" id="21_yub1f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grv7h"]
 bg_color = Color(0.2, 0.05882353, 0.05882353, 1)
@@ -297,6 +298,14 @@ offset_bottom = 600.0
 texture = ExtResource("3_grv7h")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Notificacion" parent="." unique_id=1282263171 instance=ExtResource("21_yub1f")]
+visible = false
+layout_mode = 0
+offset_left = 649.0
+offset_top = 661.0
+offset_right = 1274.0
+offset_bottom = 711.0
 
 [connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed" to="." method="_on_phone_red_pressed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue" to="." method="_on_phone_blue_pressed"]

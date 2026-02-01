@@ -5,6 +5,7 @@ const OBJETIVO_DINERO: int = 1000
 const MAX_SOSPECHA: int = 100
 
 @onready var mask_selector = $"../HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel"
+@onready var notificacion = $"../Notificacion"
 
 var EVENTOS = [
 	{
@@ -108,14 +109,17 @@ func new_turn():
 	if (GameState.turno > MAX_TURNOS):
 		checkFinal()
 		return
+		
 	print("comienzo turno")
-	
-	# TODO: llegada de información
+	await get_tree().create_timer(randf_range(5, 7)).timeout
+
+	# llegada de información
 	var evento = obtener_evento_aleatorio()
-	GameState.informacion_recibida.append(evento)
-	# que llegue notificación
+	emit_signal("evento_cambiado", evento)
+	notificacion.mostrar("llegada_informacion")
 	
-	await get_tree().create_timer(randf_range(5, 10)).timeout
+	await get_tree().create_timer(randf_range(7, 10)).timeout
+	
 	#Realizar llamada
 	if probabilidad < 0.3 or probabilidad > 0.7:
 		probabilidad = 0.5
@@ -140,17 +144,20 @@ func new_turn():
 			break
 	
 	#mecanica de llamada perdida
-	if if_contesto:
+	#if if_contesto:
 		# tiempo que dura llamada
-		await get_tree().create_timer(3).timeout
-	
+	#	await get_tree().create_timer(3).timeout
+		
 	# TODO: elección de mandar información
 	answered_phone = ""
-	emit_signal("evento_cambiado", evento)
 
 	if !if_contesto:
 		print("  - no contestaste pa, te cae multa")
+		notificacion.mostrar("llamada_perdida")
 		emit_signal("missed_call",team_to_call)
+	
+	await get_tree().create_timer(3).timeout
+	
 		
 func checkFinal():
 	if GameState.dinero >= OBJETIVO_DINERO:

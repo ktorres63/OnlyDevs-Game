@@ -30,6 +30,9 @@ func _ready() -> void:
 	
 
 func mostrar_evento(evento) -> void:
+	GameState.informacion_recibida.append(evento)
+	actualizar_estado_folder()
+	#esta linea está quedando obsoleta 
 	event_text.text = evento.texto
 	
 
@@ -39,7 +42,6 @@ func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistenci
 	
 	suspicion_bar_red.value = sospecha_imperio
 	suspicion_bar_blue.value = sospecha_resistencia
-	actualizar_estado_folder()
 
 func _on_phone_red_pressed():
 	sfx_click.play()

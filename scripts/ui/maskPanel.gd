@@ -7,6 +7,7 @@ enum Mask {
 	IMPERIO,
 	RESISTENCIA
 }
+
 @onready var mask_image = $HBoxContainer/Panel/VBoxContainer/TextureRect
 @onready var mask_label = $HBoxContainer/Panel/VBoxContainer/Label
 @onready var change_button = $HBoxContainer/TextureButton
