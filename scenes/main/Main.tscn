@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bly1onl4wdn1i" path="res://assets/audio/paper1.wav" id="10_paper_info"]
 [ext_resource type="AudioStream" uid="uid://biwc73jdwsalr" path="res://assets/audio/paper2.wav" id="11_paper_sell"]
 [ext_resource type="AudioStream" uid="uid://v8uiy83yu86e" path="res://assets/audio/radio_static.wav" id="12_static"]
+[ext_resource type="AudioStream" uid="uid://warning_beep" path="res://assets/audio/warning_beep.wav" id="13_warning"]
 [ext_resource type="PackedScene" uid="uid://du12ll2vp3rw2" path="res://scenes/main/MaskPanel.tscn" id="15_rikml"]
 [ext_resource type="Texture2D" uid="uid://bacryx6fivq0x" path="res://assets/sprites/ui/rebellion_logo.png" id="16_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://cseg0sua38dle" path="res://assets/sprites/ui/Dollar_Sign.png" id="19_vc03v"]
@@ -127,6 +128,10 @@ stream = ExtResource("11_paper_sell")
 [node name="SfxStatic" type="AudioStreamPlayer" parent="." unique_id=1780181826]
 stream = ExtResource("12_static")
 volume_db = -6.0
+
+[node name="SfxWarning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_warning")
+volume_db = -3.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=180341695]
 layout_mode = 1

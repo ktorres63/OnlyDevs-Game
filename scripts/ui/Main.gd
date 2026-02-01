@@ -14,6 +14,7 @@ extends Control
 @onready var sfx_paper_info = $SfxPaperInfo
 @onready var sfx_paper_sell = $SfxPaperSell
 @onready var sfx_static = $SfxStatic
+@onready var sfx_warning = $SfxWarning
 @onready var folder = $TextureRect2	
 @onready var mask_selector = $HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel
 @onready var notificacion = $Notificacion
@@ -59,6 +60,7 @@ func _on_phone_red_pressed():
 	phone_red.texture_normal = load("res://assets/sprites/ui/phone_red_call.png")
 		
 	if "Imperio" != mask_selector.mask_label.text:
+		sfx_warning.play()
 		notificacion.mostrar("error_mascara")
 		# no se deberia de usar missed call pero sirve para poder aplicar la penalización
 		missed_call("Imperio")
@@ -77,6 +79,7 @@ func _on_phone_blue_pressed():
 	phone_blue.texture_normal = load("res://assets/sprites/ui/phone_blue_call.png")
 	
 	if "Resistencia" != mask_selector.mask_label.text:
+		sfx_warning.play()
 		notificacion.mostrar("error_mascara")
 		# no se deberia de usar missed call pero sirve para poder aplicar la penalización
 		missed_call("Resistencia")
@@ -96,6 +99,7 @@ func _on_decision_tomada(accion: String, bando: String):
 	actualizar_estado_telefono(bando)
 	
 func missed_call(bando):
+	sfx_warning.play()
 	if bando == "Imperio":
 		GameState.sospecha_Imperio += 30
 	else:
