@@ -4,7 +4,7 @@ const MAX_TURNOS: int = 24
 const OBJETIVO_DINERO: int = 1000
 const MAX_SOSPECHA: int = 100
 
-@onready var mask_selector = $"../HBoxContainer/VBoxContainer/MascaraPanel"
+@onready var mask_selector = $"../HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel"
 
 var answered_phone
 var probabilidad = 0.5

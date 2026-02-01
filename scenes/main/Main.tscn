@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bly1onl4wdn1i" path="res://assets/audio/paper1.wav" id="10_paper_info"]
 [ext_resource type="AudioStream" uid="uid://biwc73jdwsalr" path="res://assets/audio/paper2.wav" id="11_paper_sell"]
 [ext_resource type="AudioStream" uid="uid://v8uiy83yu86e" path="res://assets/audio/radio_static.wav" id="12_static"]
-[ext_resource type="PackedScene" path="res://scenes/main/MaskPanel.tscn" id="15_rikml"]
+[ext_resource type="PackedScene" uid="uid://du12ll2vp3rw2" path="res://scenes/main/MaskPanel.tscn" id="15_rikml"]
 [ext_resource type="Texture2D" uid="uid://bacryx6fivq0x" path="res://assets/sprites/ui/rebellion_logo.png" id="16_hjnkw"]
 [ext_resource type="Texture2D" uid="uid://cseg0sua38dle" path="res://assets/sprites/ui/Dollar_Sign.png" id="19_vc03v"]
 [ext_resource type="FontFile" uid="uid://bcu1fdm6gvscc" path="res://assets/fonts/PressStart2P-Regular.ttf" id="20_grv7h"]
@@ -193,7 +193,7 @@ texture_normal = ExtResource("3_q24mn")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Control" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1258673724 instance=ExtResource("15_rikml")]
+[node name="MascaraPanel" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1258673724 instance=ExtResource("15_rikml")]
 custom_minimum_size = Vector2(316.5, 244)
 layout_mode = 2
 size_flags_horizontal = 4
