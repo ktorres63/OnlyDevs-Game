@@ -138,47 +138,42 @@ func new_turn():
 		
 	#cantidad de ring ring's xd
 	for i in range(3):
-		print("lamando ", team_to_call, " ", i)
+		print("llamando ", team_to_call, " ", i)
 		emit_signal("call_phone", {"team_to_call": team_to_call})
 		await get_tree().create_timer(1).timeout
 		if answered_phone == team_to_call:
-			print("[-] contestado ",answered_phone, "con mascara: ", mask_selector.mask_label.text)    
-			if team_to_call != mask_selector.mask_label.text:
-				return
+			print("[-] contestado ",answered_phone, "con mascara: ", mask_selector.mask_label.text)
 			answered_phone = ""
 			if_contesto = true
 			break
 	
-	#mecanica de llamada perdida
-	#if if_contesto:
-		# tiempo que dura llamada
-	#	await get_tree().create_timer(3).timeout
-		
-	# TODO: elección de mandar información
+	# Limpiar estado del teléfono
 	answered_phone = ""
 
+	# Mecánica de llamada perdida - solo si NO contestó
 	if !if_contesto:
 		print("  - no contestaste pa, te cae multa")
 		notificacion.mostrar("llamada_perdida")
-		emit_signal("missed_call",team_to_call)
-	
-	await get_tree().create_timer(3).timeout
-	
+		emit_signal("missed_call", team_to_call)
+	# Nota: El siguiente turno se inicia desde Main.gd 
+	# (missed_call -> new_turn) o (procesar_accion_telefono -> new_turn)
+
 		
 func checkFinal():
 	# Si llegó al turno máximo sin escapar, pierde (atrapado en la guerra)
 	print("DERROTA - Atrapado en la guerra")
-	get_tree().change_scene_to_file("res://scenes/game_over/GameOver.tscn")
+	# Usar call_deferred para evitar errores durante await
+	get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over/GameOver.tscn")
 
 func check_sospecha():
 	# Verificar si alguna sospecha llegó a 100
 	if GameState.sospecha_Imperio >= MAX_SOSPECHA:
 		print("GAME OVER - El Imperio te descubrió")
-		get_tree().change_scene_to_file("res://scenes/game_over/GameOver.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over/GameOver.tscn")
 		return true
 	elif GameState.sospecha_Resistencia >= MAX_SOSPECHA:
 		print("GAME OVER - La Resistencia te descubrió")
-		get_tree().change_scene_to_file("res://scenes/game_over/GameOver.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/game_over/GameOver.tscn")
 		return true
 	return false
 
@@ -186,7 +181,7 @@ func escapar():
 	# Victoria: el jugador decidió huir con suficiente dinero
 	if GameState.dinero >= OBJETIVO_DINERO:
 		print("VICTORIA - Escapaste con el dinero")
-		get_tree().change_scene_to_file("res://scenes/victory/Victory.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://scenes/victory/Victory.tscn")
 	return
 
 func procesar_accion_telefono(accion, bando):
