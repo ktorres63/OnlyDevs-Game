@@ -17,6 +17,7 @@ extends Control
 @onready var folder = $TextureRect2	
 @onready var mask_selector = $HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel
 @onready var notificacion = $Notificacion
+@onready var btn_huir = $BtnHuir
 
 
 const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
@@ -27,9 +28,11 @@ func _ready() -> void:
 	game_manager.stats_actualizados.connect(_on_stats_actualizados)
 	game_manager.call_phone.connect(call_phone)
 	game_manager.missed_call.connect(missed_call)
+	game_manager.dinero_suficiente.connect(_on_dinero_suficiente)
 	game_manager.start_game()
 	phone_blue.disabled = true
 	phone_red.disabled = true
+	btn_huir.visible = false
 	
 
 func mostrar_evento(evento) -> void:
@@ -99,6 +102,11 @@ func missed_call(bando):
 		GameState.sospecha_Resistencia += 30
 	actualizar_estado_telefono(bando)
 	game_manager.emit_stats()
+	
+	# Verificar si alguna sospecha llegó a 100
+	if game_manager.check_sospecha():
+		return
+	
 	GameState.turno += 1
 	game_manager.new_turn()
 	 
@@ -129,5 +137,14 @@ func call_phone(evento):
 	sfx_ring.stop()
 	sfx_ring.play()
 
-	UIAnimations.shake(phone)	
-		
+	UIAnimations.shake(phone)
+
+func _on_dinero_suficiente():
+	# Mostrar botón Huir cuando alcanza el objetivo
+	btn_huir.visible = true
+	notificacion.mostrar("dinero_suficiente")
+
+func _on_btn_huir_pressed():
+	# El jugador decide escapar
+	sfx_click.play()
+	game_manager.escapar()
