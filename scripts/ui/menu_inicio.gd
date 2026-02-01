@@ -1,6 +1,7 @@
 extends Control
 
-const JUEGO = "res://scenes/introduction/Intro.tscn"
+# Cambiar a "res://scenes/introduction/Intro.tscn" cuando la intro funcione
+const JUEGO = "res://scenes/main/Main.tscn"
 
 @onready var panel_creditos = $PanelCreditos
 @onready var menu_botones = $CenterContainer/VBoxContainer

@@ -22,7 +22,7 @@ DialogueManager="*uid://c3rodes2l3gxb"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://scenes/introductiom/dialog/balloon.tscn"
+runtime/balloon_path="res://scenes/introduction/dialog/balloon.tscn"
 
 [display]
 
