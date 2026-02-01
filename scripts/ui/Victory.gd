@@ -22,5 +22,4 @@ func _on_restart_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
 
 func _on_menu_button_pressed():
-	# Por ahora regresa al Main, puedes cambiar esto si creas un menú principal
-	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
+	get_tree().change_scene_to_file("res://scenes/menu_inicio/menu_inicio.tscn")
