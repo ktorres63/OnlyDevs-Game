@@ -9,6 +9,66 @@ const MAX_SOSPECHA: int = 100
 
 var EVENTOS = [
 	{
+  	"id": "rutas_suministro",
+  	"texto": "Mapas de rutas secretas de suministro entre ciudades aisladas.",
+  	"opciones": ["Vender al Imperio", "Entregar a la Resistencia"],
+  	"peso": 3
+	},
+	{
+	  "id": "codigo_defensa",
+	  "texto": "Códigos temporales de los sistemas de defensa antiaérea.",
+	  "opciones": ["Vender códigos", "Invalidarlos"],
+	  "peso": 2
+	},
+	{
+	  "id": "prisioneros_politicos",
+	  "texto": "Lista de prisioneros políticos a punto de ser ejecutados.",
+	  "opciones": ["Vender lista", "Filtrar a la resistencia"],
+	  "peso": 2
+	},
+	{
+	  "id": "vacuna_militar",
+	  "texto": "Investigación de una vacuna que solo protege a tropas de élite.",
+	  "opciones": ["Vender investigación", "Liberar datos"],
+	  "peso": 1
+	},
+	{
+	  "id": "chantaje_comandante",
+	  "texto": "Pruebas que incriminan a un comandante de alto rango.",
+	  "opciones": ["Chantajear", "Entregar pruebas"],
+	  "peso": 2
+	},
+	{
+	  "id": "ataque_falso",
+	  "texto": "Plan para realizar un ataque de falsa bandera.",
+	  "opciones": ["Vender plan", "Exponer públicamente"],
+	  "peso": 1
+	},
+	{
+	  "id": "tecnologia_vigilancia",
+	  "texto": "Prototipo de tecnología de vigilancia masiva.",
+	  "opciones": ["Vender prototipo", "Destruir tecnología"],
+	  "peso": 2
+	},
+	{
+	  "id": "lider_desaparecido",
+	  "texto": "Información sobre el paradero de un líder desaparecido.",
+	  "opciones": ["Vender ubicación", "Rescatar en secreto"],
+	  "peso": 2
+	},
+	{
+	  "id": "economia_colapsada",
+	  "texto": "Datos reales sobre el inminente colapso económico del país.",
+	  "opciones": ["Vender informe", "Filtrar a la población"],
+	  "peso": 3
+	},
+	{
+	  "id": "experimentos_humanos",
+	  "texto": "Archivos de experimentos ilegales con civiles.",
+	  "opciones": ["Vender archivos", "Hacerlos públicos"],
+	  "peso": 1
+	},
+	{
 		"id": "frecuencias_radio",
 		"texto": "Desciframos frecuencias de radio cifradas.",
 		"opciones": ["Entregar al Imperio", "Entregar a la Resistencia"],
@@ -57,7 +117,6 @@ var EVENTOS = [
 		"peso": 1
 	}
 ]
-
 
 var answered_phone
 var probabilidad = 0.5
