@@ -1,13 +1,13 @@
 extends Control
 
-@onready var money_label = $HBoxContainer/VBoxContainer3/MoneyLabel
+@onready var money_label = $Control/MoneyLabel
 @onready var turn_label = $HBoxContainer/VBoxContainer2/TurnLabel
 @onready var event_text = $HBoxContainer/VBoxContainer2/EventPanel/EventText
-@onready var phone_red = $HBoxContainer/VBoxContainer/VBoxContainer/PhoneRed
-@onready var phone_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/PhoneBlue
+@onready var phone_red = $HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed
+@onready var phone_blue = $HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue
 @onready var game_manager = $GameManager
-@onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
-@onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer/SuspicionBarBlue
+@onready var suspicion_bar_red = $HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
+@onready var suspicion_bar_blue = $HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer/SuspicionBarBlue
 @onready var sfx_ring = $SfxRing
 @onready var sfx_hangup = $SfxHangup
 @onready var sfx_click = $SfxClick
@@ -32,7 +32,7 @@ func mostrar_evento(evento) -> void:
 	
 
 func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia):
-	money_label.text = "Dinero: $" + str(dinero)
+	money_label.text = str(dinero)
 	turn_label.text = "Turno: " + str(turno)
 	
 	suspicion_bar_red.value = sospecha_imperio

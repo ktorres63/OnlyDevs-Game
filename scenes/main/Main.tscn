@@ -16,8 +16,52 @@
 [ext_resource type="AudioStream" uid="uid://bly1onl4wdn1i" path="res://assets/audio/paper1.wav" id="10_paper_info"]
 [ext_resource type="AudioStream" uid="uid://biwc73jdwsalr" path="res://assets/audio/paper2.wav" id="11_paper_sell"]
 [ext_resource type="AudioStream" uid="uid://v8uiy83yu86e" path="res://assets/audio/radio_static.wav" id="12_static"]
-[ext_resource type="PackedScene" uid="uid://du12ll2vp3rw2" path="res://scenes/main/MaskPanel.tscn" id="15_rikml"]
+[ext_resource type="PackedScene" path="res://scenes/main/MaskPanel.tscn" id="15_rikml"]
 [ext_resource type="Texture2D" uid="uid://bacryx6fivq0x" path="res://assets/sprites/ui/rebellion_logo.png" id="16_hjnkw"]
+[ext_resource type="Texture2D" uid="uid://cseg0sua38dle" path="res://assets/sprites/ui/Dollar_Sign.png" id="19_vc03v"]
+[ext_resource type="FontFile" uid="uid://bcu1fdm6gvscc" path="res://assets/fonts/PressStart2P-Regular.ttf" id="20_grv7h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grv7h"]
+bg_color = Color(0.2, 0.05882353, 0.05882353, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yub1f"]
+bg_color = Color(0.67058825, 0.16078432, 0.14509805, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8523"]
+bg_color = Color(0.078431375, 0.09803922, 0.18431373, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_roob6"]
+bg_color = Color(0.24705882, 0.44705883, 0.65882355, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_bottom_left = 5
 
 [node name="Main" type="Control" unique_id=1647585048]
 layout_mode = 3
@@ -100,41 +144,47 @@ grow_vertical = 2
 theme_override_constants/separation = 125
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1724329661]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer" unique_id=921607706]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2" unique_id=1724329661]
 layout_mode = 2
 theme_override_constants/separation = 145
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1216936912]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1216936912]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer" unique_id=1199853700]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer" unique_id=1199853700]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1491206646]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1491206646]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_sjxhf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=63828800]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=63828800]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1216970117]
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1216970117]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Sospecha"
-horizontal_alignment = 1
+text = "Sospecha Imperio"
 
-[node name="SuspicionBarRed" type="ProgressBar" parent="HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1883222905]
+[node name="SuspicionBarRed" type="ProgressBar" parent="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1883222905]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_grv7h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yub1f")
+value = 50.0
 
-[node name="PhoneRed" type="TextureButton" parent="HBoxContainer/VBoxContainer/VBoxContainer" unique_id=1661207811]
+[node name="PhoneRed" type="TextureButton" parent="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer" unique_id=1661207811]
 custom_minimum_size = Vector2(300, 220)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -143,7 +193,7 @@ texture_normal = ExtResource("3_q24mn")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="MascaraPanel" parent="HBoxContainer/VBoxContainer" unique_id=1258673724 instance=ExtResource("15_rikml")]
+[node name="Control" parent="HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1258673724 instance=ExtResource("15_rikml")]
 custom_minimum_size = Vector2(316.5, 244)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -169,48 +219,77 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 autowrap_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer" unique_id=133630349]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=514290114]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 21
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=133630349]
 layout_mode = 2
 theme_override_constants/separation = 350
-alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3" unique_id=1748784837]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer3" unique_id=1748784837]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=578253871]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=578253871]
 layout_mode = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=891154159]
+[node name="HBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=891154159]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1112756506]
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1112756506]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Sospecha"
-horizontal_alignment = 1
+text = "Sospecha Resistencia"
 
-[node name="SuspicionBarBlue" type="ProgressBar" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=61183635]
+[node name="SuspicionBarBlue" type="ProgressBar" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=61183635]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_d8523")
+theme_override_styles/fill = SubResource("StyleBoxFlat_roob6")
+value = 70.0
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=1727755498]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=1727755498]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("16_hjnkw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PhoneBlue" type="TextureButton" parent="HBoxContainer/VBoxContainer3/VBoxContainer" unique_id=215396894]
+[node name="PhoneBlue" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=215396894]
 custom_minimum_size = Vector2(300, 220)
 layout_mode = 2
 texture_normal = ExtResource("4_gyg6b")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="MoneyLabel" type="Label" parent="HBoxContainer/VBoxContainer3" unique_id=1812038768]
-layout_mode = 2
-text = "💰 dinero: "
+[node name="Control" type="Control" parent="." unique_id=139070172]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/VBoxContainer/PhoneRed" to="." method="_on_phone_red_pressed"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer3/VBoxContainer/PhoneBlue" to="." method="_on_phone_blue_pressed"]
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=691512138]
+layout_mode = 0
+offset_left = 778.0
+offset_top = 530.0
+offset_right = 1132.0
+offset_bottom = 675.0
+texture = ExtResource("19_vc03v")
+expand_mode = 1
+
+[node name="MoneyLabel" type="Label" parent="Control" unique_id=1812038768]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 568.0
+offset_right = 1255.0
+offset_bottom = 653.0
+theme_override_colors/font_color = Color(0.9882353, 0.96862745, 0.8784314, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("20_grv7h")
+theme_override_font_sizes/font_size = 85
+text = "000"
+
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed" to="." method="_on_phone_red_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue" to="." method="_on_phone_blue_pressed"]
