@@ -213,14 +213,6 @@ layout_mode = 2
 text = "Turno:"
 horizontal_alignment = 1
 
-[node name="EventPanel" type="PanelContainer" parent="HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=389366397]
-layout_mode = 2
-
-[node name="EventText" type="Label" parent="HBoxContainer/VBoxContainer2/VBoxContainer/EventPanel" unique_id=1933662527]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-autowrap_mode = 2
-
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=514290114]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -303,6 +295,20 @@ offset_bottom = 600.0
 texture = ExtResource("3_grv7h")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="EventPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 260.0
+offset_right = 840.0
+offset_bottom = 460.0
+
+[node name="EventText" type="Label" parent="EventPanel"]
+custom_minimum_size = Vector2(350, 150)
+layout_mode = 2
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Notificacion" parent="." unique_id=1282263171 instance=ExtResource("21_yub1f")]
 visible = false

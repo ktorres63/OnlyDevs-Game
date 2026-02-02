@@ -2,7 +2,7 @@ extends Control
 
 @onready var money_label = $Control/MoneyLabel
 @onready var turn_label = $HBoxContainer/VBoxContainer2/VBoxContainer/TurnLabel
-@onready var event_text = $HBoxContainer/VBoxContainer2/VBoxContainer/EventPanel/EventText
+@onready var event_text = $EventPanel/EventText
 @onready var phone_red = $HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed
 @onready var phone_blue = $HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue
 @onready var game_manager = $GameManager
