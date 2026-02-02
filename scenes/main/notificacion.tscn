@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ds64ba6ii1ibo"]
+
+[ext_resource type="Script" uid="uid://cafi140dqagyj" path="res://scripts/ui/notificacion.gd" id="1_5jvb7"]
+[ext_resource type="Texture2D" uid="uid://dgwr4nc2gonx2" path="res://assets/sprites/ui/notificacion_verde.png" id="2_3as1i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vorgs"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 15
+corner_detail = 1
+
+[node name="Notificacion" type="Control" unique_id=1282263171]
+custom_minimum_size = Vector2(625, 50)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5jvb7")
+
+[node name="ColorRect" type="Panel" parent="." unique_id=1840168761]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 625.0
+offset_bottom = 45.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vorgs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1967040935]
+layout_mode = 0
+offset_right = 495.0
+offset_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1658820939]
+custom_minimum_size = Vector2(53, 50)
+layout_mode = 2
+texture = ExtResource("2_3as1i")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=2071379982]
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+text = "Haz recibido nueva información, revisa tu folder"

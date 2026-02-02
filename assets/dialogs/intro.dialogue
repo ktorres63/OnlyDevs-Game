@@ -1,0 +1,7 @@
+~ start
+Interceptor: [#image=panel_1]Las líneas siguen activas... [wait=0.8] algunas no deberían. 
+Interceptor: [#image=panel_2]La capital aún funciona lo suficiente para fingir estabilidad. 
+Interceptor: [#image=panel_3]La radio repite consignas todo suena normal... [wait=0.9] Nada lo es. 
+Interceptor: [#image=panel_4]El final se acerca, necesito llegar a $1000... [wait=0.5] es lo único que me puede sacar de aquí. 
+Interceptor: [#image=panel_5]Tengo que irme antes de que la guerra empiece... [wait=0.8] si la guerra empieza, ya no hay salida.
+=> END

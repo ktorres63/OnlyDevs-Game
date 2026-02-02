@@ -1,34 +1,160 @@
 extends Control
 
-@onready var money_label = $HBoxContainer/VBoxContainer3/MoneyLabel
-@onready var turn_label = $HBoxContainer/VBoxContainer2/TurnLabel
-@onready var event_text = $HBoxContainer/VBoxContainer2/EventPanel/EventText
-@onready var phone_red = $HBoxContainer/VBoxContainer/PhoneRed
-@onready var phone_blue = $HBoxContainer/VBoxContainer3/PhoneBlue
+@onready var money_label = $Control/MoneyLabel
+@onready var turn_label = $HBoxContainer/VBoxContainer2/VBoxContainer/TurnLabel
+@onready var event_text = $EventPanel/EventText
+@onready var phone_red = $HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/PhoneRed
+@onready var phone_blue = $HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/PhoneBlue
 @onready var game_manager = $GameManager
-@onready var suspicion_bar_red = $HBoxContainer/VBoxContainer/SuspicionBarRed
-@onready var suspicion_bar_blue = $HBoxContainer/VBoxContainer3/SuspicionBarBlue
+@onready var suspicion_bar_red = $HBoxContainer/MarginContainer2/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/SuspicionBarRed
+@onready var suspicion_bar_blue = $HBoxContainer/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer/HBoxContainer/SuspicionBarBlue
+@onready var sfx_ring = $SfxRing
+@onready var sfx_hangup = $SfxHangup
+@onready var sfx_click = $SfxClick
+@onready var sfx_paper_info = $SfxPaperInfo
+@onready var sfx_paper_sell = $SfxPaperSell
+@onready var sfx_static = $SfxStatic
+@onready var sfx_warning = $SfxWarning
+@onready var folder = $TextureRect2	
+@onready var mask_selector = $HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel
+@onready var notificacion = $Notificacion
+@onready var btn_huir = $BtnHuir
+@onready var fade_rect = $FadeRect
 
+const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_manager.evento_cambiado.connect(mostrar_evento)
 	game_manager.stats_actualizados.connect(_on_stats_actualizados)
+	game_manager.call_phone.connect(call_phone)
+	game_manager.missed_call.connect(missed_call)
+	game_manager.dinero_suficiente.connect(_on_dinero_suficiente)
 	game_manager.start_game()
+	phone_blue.disabled = true
+	phone_red.disabled = true
+	btn_huir.visible = false
+	
+	# Fade in desde negro
+	if fade_rect:
+		fade_rect.color = Color(0, 0, 0, 1)
+		var tween = create_tween()
+		tween.tween_property(fade_rect, "color", Color(0, 0, 0, 0), 0.8)
+	
 
 func mostrar_evento(evento) -> void:
+	GameState.informacion_recibida.append(evento)
+	actualizar_estado_folder()
+	#esta linea está quedando obsoleta 
 	event_text.text = evento.texto
 	
 
 func _on_stats_actualizados(dinero, turno, sospecha_imperio, sospecha_resistencia):
-	money_label.text = "💰Dinero: $" + str(dinero)
+	money_label.text = str(dinero)
 	turn_label.text = "Turno: " + str(turno)
 	
 	suspicion_bar_red.value = sospecha_imperio
 	suspicion_bar_blue.value = sospecha_resistencia
 
 func _on_phone_red_pressed():
-	game_manager.elegir_opcion("Imperio")
+	sfx_click.play()
+	sfx_ring.stop()
+	sfx_paper_sell.play()
+	if not sfx_static.playing:
+		sfx_static.play()
+	game_manager.answer_phone("Imperio")
+	phone_red.texture_normal = load("res://assets/sprites/ui/phone_red_call.png")
+		
+	if "Imperio" != mask_selector.mask_label.text:
+		sfx_warning.play()
+		notificacion.mostrar("error_mascara")
+		# no se deberia de usar missed call pero sirve para poder aplicar la penalización
+		missed_call("Imperio")
+		return
+		
+	mostrar_panel_decision("Imperio", phone_red)
 	
 func _on_phone_blue_pressed():
-	game_manager.elegir_opcion("Resistencia")
+	sfx_click.play()
+	sfx_ring.stop()
+	sfx_paper_sell.play()
+	if not sfx_static.playing:
+		sfx_static.play()
+		
+	game_manager.answer_phone("Resistencia")
+	phone_blue.texture_normal = load("res://assets/sprites/ui/phone_blue_call.png")
+	
+	if "Resistencia" != mask_selector.mask_label.text:
+		sfx_warning.play()
+		notificacion.mostrar("error_mascara")
+		# no se deberia de usar missed call pero sirve para poder aplicar la penalización
+		missed_call("Resistencia")
+		return
+	
+	mostrar_panel_decision("Resistencia", phone_blue)
+
+func mostrar_panel_decision(bando: String, boton_telefono: Control):
+	var panel = PANEL_DECISION_SCENE.instantiate()
+	add_child(panel)
+	panel.setup_y_mostrar(bando, boton_telefono.global_position)
+	panel.opcion_seleccionada.connect(_on_decision_tomada)
+	
+func _on_decision_tomada(accion: String, bando: String):
+	print("El jugador decidió: ", accion, " para el bando: ", bando)
+	game_manager.procesar_accion_telefono(accion, bando)
+	actualizar_estado_telefono(bando)
+	
+func missed_call(bando):
+	sfx_warning.play()
+	if bando == "Imperio":
+		GameState.sospecha_Imperio += 30
+	else:
+		GameState.sospecha_Resistencia += 30
+	actualizar_estado_telefono(bando)
+	game_manager.emit_stats()
+	
+	# Verificar si alguna sospecha llegó a 100
+	if game_manager.check_sospecha():
+		return
+	
+	GameState.turno += 1
+	game_manager.new_turn()
+	 
+func actualizar_estado_telefono(bando: String):
+	sfx_static.stop()
+	if bando == "Imperio" || bando == "red" : 
+		phone_red.texture_normal = load("res://assets/sprites/ui/phoneRed.png")
+		phone_red.disabled = true
+	elif bando == "Resistencia" || bando == "blue":
+		phone_blue.texture_normal = load("res://assets/sprites/ui/phoneBlue.png")
+		phone_blue.disabled = true
+
+func actualizar_estado_folder():
+	if (GameState.informacion_recibida.is_empty()):
+		folder.texture = load("res://assets/sprites/ui/empty_folder.png")	
+	else:
+		folder.texture = load("res://assets/sprites/ui/folder.png")
+
+func call_phone(evento):
+	var phone
+	if evento.team_to_call == "Resistencia":
+		phone = phone_blue
+		phone_blue.disabled = false
+	else:
+		phone = phone_red
+		phone_red.disabled = false
+
+	sfx_ring.stop()
+	sfx_ring.play()
+
+	UIAnimations.shake(phone)
+
+func _on_dinero_suficiente():
+	# Mostrar botón Huir cuando alcanza el objetivo
+	btn_huir.visible = true
+	notificacion.mostrar("dinero_suficiente")
+
+func _on_btn_huir_pressed():
+	# El jugador decide escapar
+	sfx_click.play()
+	game_manager.escapar()
