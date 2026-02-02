@@ -3,7 +3,7 @@ extends Control
 const msg_llegada_informacion = "Haz recibido nueva información, revisa tu folder"
 const msg_llamada_perdida =     "No contestaste la llamada, incrementan las sospechas"
 const msg_error_mascara =       "No usaste la mascara correcta"
-const msg_dinero_suficiente =   "¡Tienes suficiente dinero! Puedes HUIR ahora o arriesgarte"
+const msg_dinero_suficiente =   "Juntaste el dinero, puedes HUIR ahora"
 const duracion:int = 3
 
 @onready var text_label = $HBoxContainer/Label
