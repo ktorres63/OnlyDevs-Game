@@ -4,9 +4,22 @@ const JUEGO = "res://scenes/introduction/Intro.tscn"
 
 @onready var panel_creditos = $PanelCreditos
 @onready var menu_botones = $CenterContainer/VBoxContainer
+@onready var fade_rect: ColorRect = $FadeRect
+
+func _ready() -> void:
+	# Asegurar que el fade rect esté transparente al iniciar
+	if fade_rect:
+		fade_rect.color = Color(0, 0, 0, 0)
 
 func _on_button_2_button_down():
-	SceneTransition.change_scene_with_fade(JUEGO, 0.8)
+	_fade_to_scene(JUEGO)
+
+func _fade_to_scene(scene_path: String) -> void:
+	if fade_rect:
+		var tween = create_tween()
+		tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.8)
+		await tween.finished
+	get_tree().change_scene_to_file(scene_path)
 
 func _on_btn_creditos_pressed():
 	menu_botones.visible = false

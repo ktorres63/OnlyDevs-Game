@@ -19,7 +19,7 @@ extends Control
 @onready var mask_selector = $HBoxContainer/MarginContainer2/VBoxContainer/MascaraPanel
 @onready var notificacion = $Notificacion
 @onready var btn_huir = $BtnHuir
-
+@onready var fade_rect = $FadeRect
 
 const PANEL_DECISION_SCENE = preload("res://scenes/main/panel_contestar.tscn") 
 
@@ -34,6 +34,12 @@ func _ready() -> void:
 	phone_blue.disabled = true
 	phone_red.disabled = true
 	btn_huir.visible = false
+	
+	# Fade in desde negro
+	if fade_rect:
+		fade_rect.color = Color(0, 0, 0, 1)
+		var tween = create_tween()
+		tween.tween_property(fade_rect, "color", Color(0, 0, 0, 0), 0.8)
 	
 
 func mostrar_evento(evento) -> void:

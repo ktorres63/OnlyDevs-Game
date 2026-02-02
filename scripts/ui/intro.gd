@@ -32,6 +32,7 @@ var is_transitioning := false
 @onready var text_label: RichTextLabel = $RichTextLabel
 @onready var sfx_intro: AudioStreamPlayer = $SfxIntro
 @onready var skip_hint: Label = $SkipHint
+@onready var fade_rect: ColorRect = $FadeRect
 
 func _ready() -> void:
 	text_label.visible = true
@@ -39,7 +40,10 @@ func _ready() -> void:
 	show_current_slide()
 	sfx_intro.play()
 	# Fade in al iniciar
-	await SceneTransition.fade_in(0.5)
+	if fade_rect:
+		fade_rect.color = Color(0, 0, 0, 1)
+		var tween = create_tween()
+		tween.tween_property(fade_rect, "color", Color(0, 0, 0, 0), 0.5)
 
 func _process(delta: float) -> void:
 	if is_typing:
@@ -85,4 +89,9 @@ func skip_intro() -> void:
 		return
 	is_transitioning = true
 	sfx_intro.stop()
-	SceneTransition.change_scene_with_fade("res://scenes/main/Main.tscn", 0.8)
+	# Fade out antes de cambiar escena
+	if fade_rect:
+		var tween = create_tween()
+		tween.tween_property(fade_rect, "color", Color(0, 0, 0, 1), 0.8)
+		await tween.finished
+	get_tree().change_scene_to_file("res://scenes/main/Main.tscn")
